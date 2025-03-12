@@ -1,0 +1,15 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 31px 0;
+  margin-bottom: 40px;
+
+  img {
+    width: 210px;
+  }
+
+  .btns-container {
+    display: flex;
+    gap: 40px;
+  }
+}
