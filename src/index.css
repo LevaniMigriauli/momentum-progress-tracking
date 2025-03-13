@@ -7,6 +7,12 @@
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+
+    --color-white: #FFF;
+    --color-pale-purple: #DDD2FF;
+    --color-royal-purple: #8338EC;
+    --color-light-gray: #DEE2E6;
+    --color-charcoal-gray: #212529;
 }
 
 body {

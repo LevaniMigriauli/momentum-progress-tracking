@@ -5,12 +5,12 @@
   line-height: 100%;
   padding: 10px 20px;
   border-radius: 5px;
-  background-color: white;
-  color: black;
-  border: 1px solid #8338EC;
+  background-color: var(--color-white);
+  color: var(--color-white);
+  border: 1px solid var(--color-royal-purple);
 
   &.purple{
-    color: white;
-    background-color: #8338EC;
+    color: var(--color-white);
+    background-color: var(--color-royal-purple);
   }
 }

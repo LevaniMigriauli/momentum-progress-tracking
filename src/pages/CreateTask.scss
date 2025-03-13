@@ -1,0 +1,13 @@
+.create-task {
+
+  h1 {
+    margin-bottom: 25px;
+  }
+
+  &-form {
+    border: 1px solid var(--color-pale-purple);
+    border-radius: 4px;
+    background-color: #FBF9FFA6;
+    padding: 65px 55px 0 55px;
+  }
+}
