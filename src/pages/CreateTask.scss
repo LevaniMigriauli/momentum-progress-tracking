@@ -9,5 +9,9 @@
     border-radius: 4px;
     background-color: #FBF9FFA6;
     padding: 65px 55px 0 55px;
+
+    display: grid;
+    grid-template-columns: 550px 550px;
+    column-gap: 160px;
   }
 }

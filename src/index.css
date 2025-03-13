@@ -12,7 +12,11 @@
     --color-pale-purple: #DDD2FF;
     --color-royal-purple: #8338EC;
     --color-light-gray: #DEE2E6;
+    --color-steel-gray: #6C757D;
     --color-charcoal-gray: #212529;
+    --color-deep-black: #0D0F10;
+    --color-vivid-red: #FA4D4D;
+    --color-vivid-green: #08A508;
 }
 
 body {
