@@ -12,7 +12,7 @@ export const AppProvider = ({children}) => {
     queryFn: getDepartments,
   })
 
-  const {data: employeesList} = useQuery({
+  const {data: employees} = useQuery({
     queryKey: ['employees'],
     queryFn: getEmployees,
   })
@@ -20,7 +20,15 @@ export const AppProvider = ({children}) => {
   const departmentsList = departments?.map((department) => ({
     value: department.id,
     label: department.name
-  }))
+  })) || []
+  const employeesList = employees?.map((employee) => {
+    console.log(employee)
+    return {
+      avatar: employee.avatar,
+      value: employee.id,
+      label: employee.name + ' ' + employee.surname
+    }
+  }) || []
 
   return (
       <AppContext.Provider value={{

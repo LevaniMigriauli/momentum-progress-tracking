@@ -4,7 +4,7 @@ import './App.css'
 import Layout from "./components/layout/Layout.jsx";
 import TasksHome from "./pages/TasksHome.jsx";
 import TaskDetails from "./pages/TaskDetails.jsx";
-import CreateTask from "./pages/CreateTask.jsx";
+import CreateTask from "./pages/createTask/CreateTask.jsx";
 import {AppProvider} from "./context/appContext.jsx";
 
 const queryClient = new QueryClient();

@@ -3,6 +3,25 @@
   flex-direction: column;
 }
 
+.validation-message {
+  font-size: 10px;
+  font-weight: 350;
+  line-height: 12px;
+  color: var(--color-steel-gray);
+
+  &:not(:last-child) {
+    margin-bottom: 2px;
+  }
+
+  &.invalid {
+    color: var(--color-vivid-red);
+  }
+
+  &.valid {
+    color: var(--color-vivid-green);
+  }
+}
+
 .header-main {
   font-size: 34px;
   font-weight: 600;
