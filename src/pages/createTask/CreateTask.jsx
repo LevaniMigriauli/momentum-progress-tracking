@@ -14,6 +14,48 @@ import {getStatuses} from "../../api/statuses.js";
 import DatePicker from "../../components/ui/DatePicker.jsx";
 import {createTask} from "../../api/tasks.js";
 
+const descriptionValidationMessage = 'მინიმუმ 4 სიტყვა'
+
+const validationSchema = {
+  title: {
+    required: 'მინიმუმ 3 სიმბოლო',
+    minLength: {
+      value: 3,
+      message: 'მინიმუმ 3 სიმბოლო'
+    },
+    maxLength: {
+      value: 255,
+      message: 'მაქსიმუმ 255 სიმბოლო'
+    }
+  },
+  department: {
+    required: true
+  },
+  description: {
+    validate: (value) => {
+      if (!value || !value.trim()) return true
+      const wordCount = value.trim().split(/\s+/).length;
+      return wordCount >= 4 || descriptionValidationMessage
+    },
+    maxLength: {
+      value: 255,
+      message: 'მაქსიმუმ 255 სიმბოლო'
+    }
+  },
+  employee: {
+    required: true
+  },
+  priority: {
+    required: true
+  },
+  status: {
+    required: true
+  },
+  deadline: {
+    required: true
+  }
+}
+
 const CreateTask = () => {
   const modalRef = useRef(null);
   const {departmentsList} = useAppContext()
@@ -36,48 +78,6 @@ const CreateTask = () => {
     value: status.id,
     label: status.name
   })) || []
-
-  const descriptionValidationMessage = 'მინიმუმ 4 სიტყვა'
-
-  const validationSchema = {
-    title: {
-      required: 'მინიმუმ 3 სიმბოლო',
-      minLength: {
-        value: 3,
-        message: 'მინიმუმ 3 სიმბოლო'
-      },
-      maxLength: {
-        value: 255,
-        message: 'მაქსიმუმ 255 სიმბოლო'
-      }
-    },
-    department: {
-      required: true
-    },
-    description: {
-      validate: (value) => {
-        if (!value || !value.trim()) return true
-        const wordCount = value.trim().split(/\s+/).length;
-        return wordCount >= 4 || descriptionValidationMessage
-      },
-      maxLength: {
-        value: 255,
-        message: 'მაქსიმუმ 255 სიმბოლო'
-      }
-    },
-    employee: {
-      required: true
-    },
-    priority: {
-      required: true
-    },
-    status: {
-      required: true
-    },
-    deadline: {
-      required: true
-    }
-  }
 
   const taskMutation = useMutation({
     mutationFn: createTask,
