@@ -7,8 +7,8 @@ const BASE_URL = 'https://momentum.redberryinternship.ge/api'
 const apiClient = axios.create({
   baseURL: BASE_URL,
   headers: {
-    'Content-Type': 'multipart/form-data'
-  }
+    'Content-Type': 'application/json',
+  },
 })
 
 apiClient.interceptors.request.use(

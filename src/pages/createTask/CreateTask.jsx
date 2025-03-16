@@ -1,6 +1,6 @@
 import React, {useRef} from "react";
 import {Controller, useForm} from "react-hook-form";
-import {useQuery} from "@tanstack/react-query";
+import {useMutation, useQuery} from "@tanstack/react-query";
 import './CreateTask.scss'
 import Input from "../../components/ui/Input.jsx";
 import Button from "../../components/ui/Button.jsx";
@@ -12,6 +12,7 @@ import EmployeesSelect from "./EmployeesSelect.jsx";
 import PrioritiesSelect from "./PrioritiesSelect.jsx";
 import {getStatuses} from "../../api/statuses.js";
 import DatePicker from "../../components/ui/DatePicker.jsx";
+import {createTask} from "../../api/tasks.js";
 
 const CreateTask = () => {
   const modalRef = useRef(null);
@@ -78,8 +79,21 @@ const CreateTask = () => {
     }
   }
 
+  const taskMutation = useMutation({
+    mutationFn: createTask,
+  })
+
   const onSubmit = (data) => {
-    console.log(data)
+    const requestBody = {
+      name: data.title,
+      description: data.description,
+      due_date: data.dueDate,
+      status_id: data.status.id,
+      employee_id: data.employee.id,
+      priority_id: data.priority.id,
+    }
+
+    taskMutation.mutate(requestBody);
   }
 
   return (
@@ -134,7 +148,8 @@ const CreateTask = () => {
             />
           </div>
 
-          <DatePicker className={'mw-318'} name={'deadline'} control={control} label={'დედლაინი'} isRequired errors={errors} />
+          <DatePicker className={'mw-318'} name={'dueDate'} control={control} label={'დედლაინი'} isRequired
+                      errors={errors}/>
           <Button className={'button-submit'} isPurple type={'submit'}>დავალების შექმნა</Button>
         </form>
         <CustomModal ref={modalRef}>

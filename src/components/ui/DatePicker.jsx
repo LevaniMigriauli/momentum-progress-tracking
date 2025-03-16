@@ -27,7 +27,9 @@ const DatePicker = ({name: fieldName, label, control, isRequired, errors, classN
 
             const handleDateChange = (date) => {
               if (date instanceof Date && date >= nextDay) {
-                field.onChange(date);
+                const formattedDate = date.toISOString().split('T')[0];
+                console.log(formattedDate);
+                field.onChange(formattedDate);
                 setIsOpen(false);
               }
             };
