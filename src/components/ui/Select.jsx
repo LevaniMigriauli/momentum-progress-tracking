@@ -13,7 +13,7 @@ const customStyles = {
       border: `1px solid ${state.selectProps.isValid ? 'var(--color-vivid-red)' : 'var(--color-light-gray)'}`,
       fontSize: "14px",
       fontWeight: "300",
-      padding: "5px",
+      padding: "4px",
       boxShadow: "none",
       background: 'var(--color-white)',
       '&:hover': {

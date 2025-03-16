@@ -1,0 +1,18 @@
+.react-date-picker {
+  border-radius: 8px;
+  padding: 9px;
+  border: 1px solid var(--color-light-gray);
+}
+
+.react-date-picker__wrapper {
+  border: none;
+  background: #fff;
+}
+
+.react-date-picker__calendar {
+  width: 318px;
+
+  .react-calendar {
+    border-radius: 5px;
+  }
+}

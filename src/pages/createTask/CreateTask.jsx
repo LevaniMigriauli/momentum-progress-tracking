@@ -1,16 +1,17 @@
+import React, {useRef} from "react";
 import {Controller, useForm} from "react-hook-form";
+import {useQuery} from "@tanstack/react-query";
 import './CreateTask.scss'
 import Input from "../../components/ui/Input.jsx";
 import Button from "../../components/ui/Button.jsx";
 import Select from "../../components/ui/Select.jsx";
 import CustomModal from "../../components/ui/Modal.jsx";
-import React, {useRef} from "react";
 import {useAppContext} from "../../context/appContext.jsx";
 import InputLabel from "../../components/ui/InputLabel.jsx";
 import EmployeesSelect from "./EmployeesSelect.jsx";
 import PrioritiesSelect from "./PrioritiesSelect.jsx";
-import {useQuery} from "@tanstack/react-query";
 import {getStatuses} from "../../api/statuses.js";
+import DatePicker from "../../components/ui/DatePicker.jsx";
 
 const CreateTask = () => {
   const modalRef = useRef(null);
@@ -71,6 +72,9 @@ const CreateTask = () => {
     },
     status: {
       required: true
+    },
+    deadline: {
+      required: true
     }
   }
 
@@ -130,7 +134,8 @@ const CreateTask = () => {
             />
           </div>
 
-          <Button isPurple type={'submit'}>დავალების შექმნა</Button>
+          <DatePicker className={'mw-318'} name={'deadline'} control={control} label={'დედლაინი'} isRequired errors={errors} />
+          <Button className={'button-submit'} isPurple type={'submit'}>დავალების შექმნა</Button>
         </form>
         <CustomModal ref={modalRef}>
           <h2>Custom Modal</h2>
