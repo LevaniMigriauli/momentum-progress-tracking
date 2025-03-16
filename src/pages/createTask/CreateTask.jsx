@@ -57,30 +57,37 @@ const validationSchema = {
   }
 }
 
+const today = new Date();
+const nextDay = new Date(today)
+nextDay.setDate(nextDay.getDate() + 1);
+
+const handleInitialState = (defaultPriority) => ({
+  title: '',
+  department: null,
+  description: '',
+  employee: null,
+  priority: defaultPriority,
+  status: null,
+  dueDate: nextDay,
+})
+
+const loadFormData = (defaultPriority) => {
+  const savedData = localStorage.getItem('createTaskFormData');
+  return savedData ? JSON.parse(savedData) : handleInitialState(defaultPriority);
+}
+
 const CreateTask = () => {
   const navigate = useNavigate();
   const modalRef = useRef(null);
   const {departmentsList, defaultPriority} = useAppContext()
 
-  const today = new Date();
-  const nextDay = new Date(today)
-  nextDay.setDate(nextDay.getDate() + 1);
-
   const {
-    register, control, handleSubmit, getValues, setValue, formState: {
+    register, control, handleSubmit, getValues, setValue, watch, formState: {
       errors, dirtyFields
     }
   } = useForm({
     mode: 'onChange',
-    defaultValues: {
-      title: '',
-      department: null,
-      description: '',
-      employee: null,
-      priority: defaultPriority || null,
-      status: null,
-      dueDate: nextDay,
-    }
+    defaultValues: loadFormData(defaultPriority),
   })
 
   useEffect(() => {
@@ -88,6 +95,13 @@ const CreateTask = () => {
       setValue('priority', defaultPriority);
     }
   }, [defaultPriority, setValue]);
+
+  useEffect(() => {
+    const formValues = watch(data => {
+      localStorage.setItem('createTaskFormData', JSON.stringify(data))
+    })
+    return () => formValues?.unsubscribe()
+  }, [watch])
 
   const {data: statuses} = useQuery({
     queryKey: ['statuses'],
