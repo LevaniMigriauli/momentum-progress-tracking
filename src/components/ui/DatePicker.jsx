@@ -12,7 +12,7 @@ const georgianMonths = [
   'ივლისი', 'აგვისტო', 'სექტემბერი', 'ოქტომბერი', 'ნოემბერი', 'დეკემბერი'
 ];
 
-const DatePicker = ({name: fieldName, label, control, isRequired, errors, className}) => {
+const DatePicker = ({name: fieldName, label, control, isRequired, errors, className, nextDay}) => {
   const [isOpen, setIsOpen] = useState(false);
   // const hasError = !!errors?.[fieldName];
 
@@ -21,13 +21,10 @@ const DatePicker = ({name: fieldName, label, control, isRequired, errors, classN
           name={fieldName}
           control={control}
           render={({field}) => {
-            const today = new Date();
-            const nextDay = new Date(today);
-            nextDay.setDate(today.getDate() + 1);
 
             const handleDateChange = (date) => {
-              if (date instanceof Date && date >= nextDay) {
-                const formattedDate = date.toISOString().split('T')[0];
+              if (date instanceof Date) {
+                const formattedDate = date.toLocaleDateString('en-CA');
                 console.log(formattedDate);
                 field.onChange(formattedDate);
                 setIsOpen(false);
@@ -40,7 +37,7 @@ const DatePicker = ({name: fieldName, label, control, isRequired, errors, classN
                   <ReactDatePicker
                       {...field}
                       className={`${className}`}
-                      value={field.value || nextDay}
+                      value={field.value ?? nextDay}
                       format="dd/MM/yyyy"
                       dayPlaceholder="DD"
                       monthPlaceholder="MM"

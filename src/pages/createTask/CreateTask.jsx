@@ -1,6 +1,7 @@
-import React, {useRef} from "react";
+import React, {useEffect, useRef} from "react";
 import {Controller, useForm} from "react-hook-form";
 import {useMutation, useQuery} from "@tanstack/react-query";
+import {useNavigate} from "react-router-dom";
 import './CreateTask.scss'
 import Input from "../../components/ui/Input.jsx";
 import Button from "../../components/ui/Button.jsx";
@@ -57,16 +58,36 @@ const validationSchema = {
 }
 
 const CreateTask = () => {
+  const navigate = useNavigate();
   const modalRef = useRef(null);
-  const {departmentsList} = useAppContext()
+  const {departmentsList, defaultPriority} = useAppContext()
+
+  const today = new Date();
+  const nextDay = new Date(today)
+  nextDay.setDate(nextDay.getDate() + 1);
 
   const {
-    register, control, handleSubmit, getValues, formState: {
+    register, control, handleSubmit, getValues, setValue, formState: {
       errors, dirtyFields
     }
   } = useForm({
     mode: 'onChange',
+    defaultValues: {
+      title: '',
+      department: null,
+      description: '',
+      employee: null,
+      priority: defaultPriority || null,
+      status: null,
+      dueDate: nextDay,
+    }
   })
+
+  useEffect(() => {
+    if (defaultPriority) {
+      setValue('priority', defaultPriority);
+    }
+  }, [defaultPriority, setValue]);
 
   const {data: statuses} = useQuery({
     queryKey: ['statuses'],
@@ -81,6 +102,9 @@ const CreateTask = () => {
 
   const taskMutation = useMutation({
     mutationFn: createTask,
+    onSuccess: () => {
+      navigate('/')
+    }
   })
 
   const onSubmit = (data) => {
@@ -149,7 +173,7 @@ const CreateTask = () => {
           </div>
 
           <DatePicker className={'mw-318'} name={'dueDate'} control={control} label={'დედლაინი'} isRequired
-                      errors={errors}/>
+                      errors={errors} nextDay={nextDay}/>
           <Button className={'button-submit'} isPurple type={'submit'}>დავალების შექმნა</Button>
         </form>
         <CustomModal ref={modalRef}>

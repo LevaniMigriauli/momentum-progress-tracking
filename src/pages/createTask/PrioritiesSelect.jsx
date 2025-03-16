@@ -25,9 +25,8 @@ const singleValue = (props) => {
 }
 
 const EmployeesSelect = ({name: filedName, label, control, errors, rules, isRequired, isDisabled}) => {
-  const {prioritiesList} = useAppContext()
-  console.log(prioritiesList)
-  const defaultPriority = prioritiesList.find(item => item.value === 2) || null
+  const {prioritiesList, defaultPriority} = useAppContext()
+
   console.log(defaultPriority)
   return (
       <Select control={control} name={filedName} label={label} isRequired={isRequired}

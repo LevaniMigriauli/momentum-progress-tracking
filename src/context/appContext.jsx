@@ -37,7 +37,6 @@ export const AppProvider = ({children}) => {
   }) || []
 
   const prioritiesList = priorities?.map((priority) => {
-
     return {
       id: priority.id,
       icon: priority.icon,
@@ -45,12 +44,14 @@ export const AppProvider = ({children}) => {
       label: priority.name,
     }
   }) || []
+  const defaultPriority = prioritiesList.find(item => item.value === 2) || null
 
   return (
       <AppContext.Provider value={{
         departmentsList,
         employeesList,
-        prioritiesList
+        prioritiesList,
+        defaultPriority
       }}>
         {children}
       </AppContext.Provider>
