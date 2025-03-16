@@ -1,5 +1,4 @@
 import {useAppContext} from "../../context/appContext.jsx";
-import "./PrioritiesSelect.scss"
 import Select from "../../components/ui/Select.jsx";
 import {components} from "react-select";
 

@@ -29,6 +29,7 @@ export const AppProvider = ({children}) => {
   })) || []
   const employeesList = employees?.map((employee) => {
     return {
+      id: employee.id,
       avatar: employee.avatar,
       value: employee.id,
       label: employee.name + ' ' + employee.surname
@@ -38,6 +39,7 @@ export const AppProvider = ({children}) => {
   const prioritiesList = priorities?.map((priority) => {
 
     return {
+      id: priority.id,
       icon: priority.icon,
       value: priority.id,
       label: priority.name,

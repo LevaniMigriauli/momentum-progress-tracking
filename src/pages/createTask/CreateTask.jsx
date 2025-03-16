@@ -9,6 +9,8 @@ import {useAppContext} from "../../context/appContext.jsx";
 import InputLabel from "../../components/ui/InputLabel.jsx";
 import EmployeesSelect from "./EmployeesSelect.jsx";
 import PrioritiesSelect from "./PrioritiesSelect.jsx";
+import {useQuery} from "@tanstack/react-query";
+import {getStatuses} from "../../api/statuses.js";
 
 const CreateTask = () => {
   const modalRef = useRef(null);
@@ -21,6 +23,17 @@ const CreateTask = () => {
   } = useForm({
     mode: 'onChange',
   })
+
+  const {data: statuses} = useQuery({
+    queryKey: ['statuses'],
+    queryFn: getStatuses,
+  })
+
+  const statusesList = statuses?.map((status) => ({
+    id: status.id,
+    value: status.id,
+    label: status.name
+  })) || []
 
   const descriptionValidationMessage = 'მინიმუმ 4 სიტყვა'
 
@@ -37,7 +50,7 @@ const CreateTask = () => {
       }
     },
     department: {
-      required: true,
+      required: true
     },
     description: {
       validate: (value) => {
@@ -51,10 +64,13 @@ const CreateTask = () => {
       }
     },
     employee: {
-      required: true,
+      required: true
     },
     priority: {
-      required: true,
+      required: true
+    },
+    status: {
+      required: true
     }
   }
 
@@ -105,8 +121,14 @@ const CreateTask = () => {
                            rules={validationSchema.employee}
                            isDisabled={!getValues('department')} modalRef={modalRef}/>
 
-          <PrioritiesSelect control={control} name={'priority'} label={'პრიორიტეტი'} isRequired errors={errors}
-                            rules={validationSchema.priority}/>
+          <div className={'form__priority-status'}>
+            <PrioritiesSelect control={control} name={'priority'} label={'პრიორიტეტი'} isRequired errors={errors}
+                              rules={validationSchema.priority}/>
+
+            <Select control={control} name={'status'} label={'სტატუსი'} isRequired errors={errors}
+                    rules={validationSchema.status} options={statusesList}
+            />
+          </div>
 
           <Button isPurple type={'submit'}>დავალების შექმნა</Button>
         </form>

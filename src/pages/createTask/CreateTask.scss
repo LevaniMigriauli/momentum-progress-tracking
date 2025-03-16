@@ -47,5 +47,10 @@
         height: 18px;
       }
     }
+
+    &__priority-status {
+        display: flex;
+        gap: 32px;
+    }
   }
 }
