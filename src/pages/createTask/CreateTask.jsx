@@ -8,6 +8,7 @@ import React, {useRef} from "react";
 import {useAppContext} from "../../context/appContext.jsx";
 import InputLabel from "../../components/ui/InputLabel.jsx";
 import EmployeesSelect from "./EmployeesSelect.jsx";
+import PrioritiesSelect from "./PrioritiesSelect.jsx";
 
 const CreateTask = () => {
   const modalRef = useRef(null);
@@ -50,6 +51,9 @@ const CreateTask = () => {
       }
     },
     employee: {
+      required: true,
+    },
+    priority: {
       required: true,
     }
   }
@@ -100,6 +104,9 @@ const CreateTask = () => {
                            errors={errors}
                            rules={validationSchema.employee}
                            isDisabled={!getValues('department')} modalRef={modalRef}/>
+
+          <PrioritiesSelect control={control} name={'priority'} label={'პრიორიტეტი'} isRequired errors={errors}
+                            rules={validationSchema.priority}/>
 
           <Button isPurple type={'submit'}>დავალების შექმნა</Button>
         </form>

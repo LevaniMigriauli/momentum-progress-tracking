@@ -1,45 +1,62 @@
-import Select from "react-select";
+import Select, {components} from "react-select";
 import {Controller} from "react-hook-form";
 import './Select.scss'
 import InputLabel from "./InputLabel.jsx";
 
 const customStyles = {
-  control: (provided) => ({
-    ...provided,
-    borderRadius: "5px",
-    outline: "none",
-    border: "1px solid var(--color-light-gray)",
+  control: (base, state) => {
+    console.log(base, state.selectProps);
+    return {
+      ...base,
+      borderRadius: "5px",
+      outline: "none",
+      border: `1px solid ${state.selectProps.isValid ? 'var(--color-vivid-red)' : 'var(--color-light-gray)'}`,
+      fontSize: "14px",
+      fontWeight: "300",
+      padding: "5px",
+      boxShadow: "none",
+      background: 'var(--color-white)',
+      '&:hover': {
+        borderColor: `${state.selectProps.isValid ? 'var(--color-vivid-red)' : 'var(--color-light-gray)'} `
+      }
+    }
+  },
+  menu: (base) => ({
+    ...base,
+    margin: 0,
+  }),
+  menuList: (base) => ({
+    ...base,
+    padding: 0,
+  }),
+  option: (base) => ({
+    ...base,
     fontSize: "14px",
     fontWeight: "300",
     color: "var(--color-deep-black)",
-    padding: "5px",
-    boxShadow: "none",
-    background: 'var(--color-white)',
+    padding: '9px 14px',
+    height: '46px',
+    display: "flex",
+    alignItems: "center",
+    gap: '6px'
   }),
-  menu: (provided) => ({
-    ...provided,
-    margin: 0,
-  }),
-  menuList: (provided) => ({
-    ...provided,
-    padding: 0,
-  }),
-  option: (provided) => ({
-    ...provided,
+  singleValue: (base) => ({
+    ...base,
     fontSize: "14px",
     fontWeight: "300",
-    padding: '9px 14px'
-  }),
-  singleValue: (provided) => ({
-    ...provided,
-    fontSize: "14px",
-    fontWeight: "300",
+    display: "flex",
+    alignItems: "center",
+    gap: '10px',
+    '& img': {
+      borderRadius: '50%',
+      height: "28px"
+    }
   }),
   indicatorSeparator: () => ({
     display: "none",
   }),
-  dropdownIndicator: (provided, state) => ({
-    ...provided,
+  dropdownIndicator: (base, state) => ({
+    ...base,
     color: state.isDisabled ? "var(--color-soft-gray)" : "var(--color-deep-gray)",
   }),
 };
@@ -54,23 +71,29 @@ const CustomSelect = ({
                         label,
                         errors,
                         isDisabled = false,
-                        optionRenderer
+                        optionRenderer,
+                        singleValue,
+                        defaultValue,
                       }) => {
 
-  const hasError = errors?.[fieldName]?.type === 'required'
+  const isValid = !!errors?.[fieldName]
 
   return (
       <Controller name={fieldName} control={control} rules={rules} render={({field}) => (
           <div className="form-group">
             <InputLabel isRequired={isRequired} label={label} isDisabled={isDisabled}/>
             <Select
-                className={`${hasError ? 'invalid' : ''}`}
                 {...field}
+                value={field.value || defaultValue}
                 options={options}
                 isDisabled={isDisabled}
                 isSearchable={false}
                 styles={customStyles}
-                components={optionRenderer ? {Option: optionRenderer} : null}
+                isValid={isValid}
+                components={{
+                  Option: optionRenderer || components.Option,
+                  SingleValue: singleValue || components.SingleValue,
+                }}
             />
           </div>)}
       />

@@ -2,6 +2,7 @@ import {createContext, useContext} from 'react'
 import {useQuery} from "@tanstack/react-query";
 import {getDepartments} from "../api/departments.js";
 import {getEmployees} from "../api/employees.js";
+import {getPriorities} from "../api/priorities.js";
 
 const AppContext = createContext()
 
@@ -17,12 +18,16 @@ export const AppProvider = ({children}) => {
     queryFn: getEmployees,
   })
 
+  const {data: priorities} = useQuery({
+    queryKey: ['priorities'],
+    queryFn: getPriorities,
+  })
+
   const departmentsList = departments?.map((department) => ({
     value: department.id,
     label: department.name
   })) || []
   const employeesList = employees?.map((employee) => {
-    console.log(employee)
     return {
       avatar: employee.avatar,
       value: employee.id,
@@ -30,10 +35,20 @@ export const AppProvider = ({children}) => {
     }
   }) || []
 
+  const prioritiesList = priorities?.map((priority) => {
+
+    return {
+      icon: priority.icon,
+      value: priority.id,
+      label: priority.name,
+    }
+  }) || []
+
   return (
       <AppContext.Provider value={{
         departmentsList,
-        employeesList
+        employeesList,
+        prioritiesList
       }}>
         {children}
       </AppContext.Provider>

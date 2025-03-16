@@ -21,6 +21,7 @@
       border: 1px solid var(--color-light-gray);
       height: 133px;
       resize: none;
+      margin-bottom: 4px;
 
       &:focus {
         outline: none;
@@ -28,6 +29,22 @@
 
       &.invalid-border {
         border-color: var(--color-vivid-red);
+      }
+    }
+
+    .custom-option {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+
+      img {
+        border-radius: 50%;
+        height: 28px;
+        width: 28px;
+      }
+
+      .icon-priority {
+        height: 18px;
       }
     }
   }
