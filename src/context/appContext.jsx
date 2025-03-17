@@ -30,6 +30,7 @@ export const AppProvider = ({children}) => {
   })
 
   const departmentsList = departments?.map((department) => ({
+    id: department.id,
     value: department.id,
     label: department.name
   })) || []

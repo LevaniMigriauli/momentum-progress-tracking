@@ -2,7 +2,7 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import './App.css'
 import Layout from "./components/layout/Layout.jsx";
-import TasksHome from "./pages/TasksHome.jsx";
+import TasksHome from "./pages/tasksHome/TasksHome.jsx";
 import TaskDetails from "./pages/TaskDetails.jsx";
 import CreateTask from "./pages/createTask/CreateTask.jsx";
 import {AppProvider} from "./context/appContext.jsx";
