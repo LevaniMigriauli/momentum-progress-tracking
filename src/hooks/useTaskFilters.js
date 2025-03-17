@@ -1,8 +1,9 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { getTasks } from '../api/tasks.js'
+import { hasSelectedOptions } from '../utils/selectors.js'
 
-const initialState = {
+export const initialState = {
   departments: [],
   priorities: [],
   employee: []
@@ -27,10 +28,7 @@ const useTaskFilters = () => {
 
   const filteredTasks =
     useMemo(() => {
-      const hasSelectedOptions = (Object.entries(selectedOptions).
-        some(([_, values]) => values.length > 0))
-
-      if (!hasSelectedOptions) return tasksList
+      if (!hasSelectedOptions(selectedOptions)) return tasksList
 
       return tasksList?.filter((task) => {
         const matchesDepartment = selectedOptions.departments.length === 0 ||
