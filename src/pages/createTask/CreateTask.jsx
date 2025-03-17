@@ -1,6 +1,6 @@
 import React, {useEffect, useRef} from "react";
 import {Controller, useForm} from "react-hook-form";
-import {useMutation, useQuery} from "@tanstack/react-query";
+import {useMutation} from "@tanstack/react-query";
 import {useNavigate} from "react-router-dom";
 import './CreateTask.scss'
 import Input from "../../components/ui/Input.jsx";
@@ -11,7 +11,6 @@ import {useAppContext} from "../../context/appContext.jsx";
 import InputLabel from "../../components/ui/InputLabel.jsx";
 import EmployeesSelect from "./EmployeesSelect.jsx";
 import PrioritiesSelect from "./PrioritiesSelect.jsx";
-import {getStatuses} from "../../api/statuses.js";
 import DatePicker from "../../components/ui/DatePicker.jsx";
 import {createTask} from "../../api/tasks.js";
 
@@ -79,7 +78,7 @@ const loadFormData = (defaultPriority) => {
 const CreateTask = () => {
   const navigate = useNavigate();
   const modalRef = useRef(null);
-  const {departmentsList, defaultPriority} = useAppContext()
+  const {departmentsList, defaultPriority, statusesList} = useAppContext()
 
   const {
     register, control, handleSubmit, getValues, setValue, watch, formState: {
@@ -103,21 +102,11 @@ const CreateTask = () => {
     return () => formValues?.unsubscribe()
   }, [watch])
 
-  const {data: statuses} = useQuery({
-    queryKey: ['statuses'],
-    queryFn: getStatuses,
-  })
-
-  const statusesList = statuses?.map((status) => ({
-    id: status.id,
-    value: status.id,
-    label: status.name
-  })) || []
-
   const taskMutation = useMutation({
     mutationFn: createTask,
     onSuccess: () => {
       navigate('/')
+      localStorage.removeItem('createTaskFormData')
     }
   })
 
