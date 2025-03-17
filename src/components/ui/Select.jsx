@@ -1,6 +1,5 @@
 import Select, {components} from "react-select";
 import {Controller} from "react-hook-form";
-import './Select.scss'
 import InputLabel from "./InputLabel.jsx";
 
 const customStyles = {
