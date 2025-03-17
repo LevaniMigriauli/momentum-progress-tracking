@@ -10,10 +10,10 @@ const TasksHome = () => {
     prioritiesList,
     employeesList
   } = useAppContext()
-  const { selectedOptions, setSelectedOptions, filtered } = useTaskFilters()
+  const { selectedOptions, setSelectedOptions, filteredTasks } = useTaskFilters()
 
   const taskByStatus = statusesList?.reduce((acc, status) => {
-    acc[status.id] = filtered?.filter(task => task.status.id === status.id)
+    acc[status.id] = filteredTasks?.filter(task => task.status.id === status.id)
     return acc
   }, {})
 
@@ -21,6 +21,7 @@ const TasksHome = () => {
     <div>
       <h1>დავალებების გვერდი</h1>
       <section className="section-filter">
+        <div>
         <ControlledSelect name={'departments'} label={'დეპარტამენტი'}
                           options={departmentsList}
                           selectedOptions={selectedOptions}
@@ -33,6 +34,7 @@ const TasksHome = () => {
                           options={employeesList}
                           selectedOptions={selectedOptions}
                           setSelectedOptions={setSelectedOptions}/>
+        </div>
       </section>
       <div>
         <ul className="tasks-list" style={{ display: 'flex', gap: '100px' }}>

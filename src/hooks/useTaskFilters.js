@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { getTasks } from '../api/tasks.js'
 
@@ -8,19 +8,29 @@ const initialState = {
   employee: []
 }
 
+const loadSelectedOptions = () => {
+  const selectedOptions = localStorage.getItem('selectedOptions')
+  return selectedOptions ? JSON.parse(selectedOptions) : initialState
+}
+
 const useTaskFilters = () => {
-  const [selectedOptions, setSelectedOptions] = useState(initialState)
+  const [selectedOptions, setSelectedOptions] = useState(loadSelectedOptions())
+
+  useEffect(() => {
+    localStorage.setItem('selectedOptions', JSON.stringify(selectedOptions))
+  }, [selectedOptions])
 
   const { data: tasksList } = useQuery({
     queryKey: ['tasks'],
     queryFn: getTasks
   })
 
-  const filtered =
+  const filteredTasks =
     useMemo(() => {
-      if (!tasksList) return []
-      if (Object.entries(selectedOptions).
-        every((property) => property[1].length === 0)) return tasksList
+      const hasSelectedOptions = (Object.entries(selectedOptions).
+        some(([_, values]) => values.length > 0))
+
+      if (!hasSelectedOptions) return tasksList
 
       return tasksList?.filter((task) => {
         const matchesDepartment = selectedOptions.departments.length === 0 ||
@@ -40,7 +50,7 @@ const useTaskFilters = () => {
   return {
     selectedOptions,
     setSelectedOptions,
-    filtered
+    filteredTasks
   }
 }
 
