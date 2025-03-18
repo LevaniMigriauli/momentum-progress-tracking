@@ -74,37 +74,48 @@ const CustomSelect = ({
   optionRenderer,
   singleValue,
   defaultValue,
+  value,
+  onChange,
 }) => {
   const isValid = !!errors?.[fieldName]
 
+  const selectProps = {
+    value,
+    options,
+    isDisabled,
+    isSearchable: false,
+    styles: customStyles,
+    isValid,
+    components: {
+      Option: optionRenderer || components.Option,
+      SingleValue: singleValue || components.SingleValue,
+    },
+  }
+
   return (
-    <Controller
-      name={fieldName}
-      control={control}
-      rules={rules}
-      render={({ field }) => (
-        <div className="form-group">
-          <InputLabel
-            isRequired={isRequired}
-            label={label}
-            isDisabled={isDisabled}
-          />
-          <Select
-            {...field}
-            value={field.value || defaultValue}
-            options={options}
-            isDisabled={isDisabled}
-            isSearchable={false}
-            styles={customStyles}
-            isValid={isValid}
-            components={{
-              Option: optionRenderer || components.Option,
-              SingleValue: singleValue || components.SingleValue,
-            }}
-          />
-        </div>
+    <div className="form-group">
+      <InputLabel
+        isRequired={isRequired}
+        label={label}
+        isDisabled={isDisabled}
+      />
+      {control ? (
+        <Controller
+          name={fieldName}
+          control={control}
+          rules={rules}
+          render={({ field }) => (
+            <Select
+              {...field}
+              {...selectProps}
+              value={field.value ?? defaultValue}
+            />
+          )}
+        />
+      ) : (
+        <Select {...selectProps} onChange={onChange} />
       )}
-    />
+    </div>
   )
 }
 
