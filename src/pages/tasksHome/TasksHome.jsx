@@ -3,8 +3,10 @@ import { useAppContext } from '../../context/appContext.jsx'
 import ControlledSelect from './ControlledSelect.jsx'
 import useTaskFilters, {initialState}  from '../../hooks/useTaskFilters.js'
 import { hasSelectedOptions } from '../../utils/selectors.js'
+import { useNavigate } from 'react-router-dom'
 
 const TasksHome = () => {
+  const navigate = useNavigate()
   const {
     departmentsList,
     statusesList,
@@ -59,17 +61,18 @@ const TasksHome = () => {
           }
         </ul>
       </section>
-      <div>
-        <ul className="tasks-list" style={{ display: 'flex', gap: '100px' }}>
+      <div className={'tasks-container'}>
+        <ul className="priorities-list" style={{ display: 'flex', gap: '100px' }}>
           {statusesList.map(item => {
             return (
-              <li key={item.id}>
+              <li key={item.id} className={'priorities-list-item'}>
                 {item.name}
-                <ul>
+                <ul className="tasks-list">
                   {taskByStatus[item.id]?.map(task => {
 
                     return (
-                      <div key={task.id}>
+                      <div key={task.id} className={'tasks-list-card'}
+                      onClick={() => navigate(`/task-details/${task.id}`) }>
                         {task.name}
                       </div>
                     )

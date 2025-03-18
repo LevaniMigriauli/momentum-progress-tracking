@@ -64,7 +64,6 @@ const ControlledSelect = ({
 
   return (
     <div ref={selectRef} style={{
-      position: 'relative',
       maxWidth: '200px',
       border: '1px solid #ccc',
       borderRadius: '4px'

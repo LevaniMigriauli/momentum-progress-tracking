@@ -1,7 +1,22 @@
 
 .section-filter {
+  position: relative;
 
   .filter-dropdowns {
     display: flex;
+  }
+}
+
+.tasks-container {
+
+  .priorities-list {
+
+
+    .tasks-list {
+
+      .tasks-list-card {
+        padding: 20px;
+      }
+    }
   }
 }

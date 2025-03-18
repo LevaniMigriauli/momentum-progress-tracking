@@ -18,7 +18,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Layout/>}>
                 <Route index element={<TasksHome/>}/>
-                <Route path="/task-details" element={<TaskDetails/>}/>
+                <Route path="/task-details/:id" element={<TaskDetails/>}/>
                 <Route path="/create-task" element={<CreateTask/>}/>
               </Route>
             </Routes>
