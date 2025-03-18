@@ -6,13 +6,13 @@ import './CreateTask.scss'
 import Input from "../../components/ui/Input.jsx";
 import Button from "../../components/ui/Button.jsx";
 import Select from "../../components/ui/Select.jsx";
-import CustomModal from "../../components/ui/Modal.jsx";
 import {useAppContext} from "../../context/appContext.jsx";
 import InputLabel from "../../components/ui/InputLabel.jsx";
 import EmployeesSelect from "./EmployeesSelect.jsx";
 import PrioritiesSelect from "./PrioritiesSelect.jsx";
 import DatePicker from "../../components/ui/DatePicker.jsx";
 import {createTask} from "../../api/tasks.js";
+import CreateEmplyeeModal from '../../components/common/CreateEmplyeeModal.jsx'
 
 const descriptionValidationMessage = 'მინიმუმ 4 სიტყვა'
 
@@ -179,10 +179,7 @@ const CreateTask = () => {
                       errors={errors} nextDay={nextDay}/>
           <Button className={'button-submit'} isPurple type={'submit'}>დავალების შექმნა</Button>
         </form>
-        <CustomModal ref={modalRef}>
-          <h2>Custom Modal</h2>
-          <button onClick={() => modalRef?.current?.handleCloseModal()}>Close</button>
-        </CustomModal>
+        <CreateEmplyeeModal modalRef={modalRef}/>
       </div>
   )
 }

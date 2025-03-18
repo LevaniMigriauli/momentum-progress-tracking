@@ -1,0 +1,16 @@
+.modal-content {
+
+  .modal-title {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 500;
+    margin-bottom: 28px;
+  }
+
+  .create-employee-modal {
+    display: grid;
+    grid-template-columns: repeat(2, 384px);
+    column-gap: 45px;
+    row-gap: 45px;
+  }
+}
