@@ -61,6 +61,7 @@ const initialValues = {
 }
 
 const CreateEmployeeModal = ({ modalRef }) => {
+  const fileInputRef = useRef(null)
   const { departmentsList } = useAppContext()
   const queryClient = useQueryClient()
   const {
@@ -133,7 +134,6 @@ const CreateEmployeeModal = ({ modalRef }) => {
             name={'employeeAvatar'}
             rules={validationSchema.employeeAvatar}
             render={({ formState: { errors }, field: { value, onChange } }) => {
-              const fileInputRef = useRef(null)
               const handleFileChange = (e) => {
                 const file = e.target.files[0]
                 if (file) {
