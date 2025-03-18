@@ -1,23 +1,23 @@
-import Select, {components} from "react-select";
-import {Controller} from "react-hook-form";
-import InputLabel from "./InputLabel.jsx";
+import Select, { components } from 'react-select'
+import { Controller } from 'react-hook-form'
+import InputLabel from './InputLabel.jsx'
 
 const customStyles = {
   control: (base, state) => {
-    console.log(base, state.selectProps);
+    console.log(base, state.selectProps)
     return {
       ...base,
-      borderRadius: "5px",
-      outline: "none",
+      borderRadius: '5px',
+      outline: 'none',
       border: `1px solid ${state.selectProps.isValid ? 'var(--color-vivid-red)' : 'var(--color-light-gray)'}`,
-      fontSize: "14px",
-      fontWeight: "300",
-      padding: "4px",
-      boxShadow: "none",
+      fontSize: '14px',
+      fontWeight: '300',
+      padding: '4px',
+      boxShadow: 'none',
       background: 'var(--color-white)',
       '&:hover': {
-        borderColor: `${state.selectProps.isValid ? 'var(--color-vivid-red)' : 'var(--color-light-gray)'} `
-      }
+        borderColor: `${state.selectProps.isValid ? 'var(--color-vivid-red)' : 'var(--color-light-gray)'} `,
+      },
     }
   },
   menu: (base) => ({
@@ -30,73 +30,82 @@ const customStyles = {
   }),
   option: (base) => ({
     ...base,
-    fontSize: "14px",
-    fontWeight: "300",
-    color: "var(--color-deep-black)",
+    fontSize: '14px',
+    fontWeight: '300',
+    color: 'var(--color-deep-black)',
     padding: '9px 14px',
     height: '46px',
-    display: "flex",
-    alignItems: "center",
-    gap: '6px'
+    display: 'flex',
+    alignItems: 'center',
+    gap: '6px',
   }),
   singleValue: (base) => ({
     ...base,
-    fontSize: "14px",
-    fontWeight: "300",
-    display: "flex",
-    alignItems: "center",
+    fontSize: '14px',
+    fontWeight: '300',
+    display: 'flex',
+    alignItems: 'center',
     gap: '10px',
     '& img': {
       borderRadius: '50%',
-      height: "28px"
-    }
+      height: '28px',
+    },
   }),
   indicatorSeparator: () => ({
-    display: "none",
+    display: 'none',
   }),
   dropdownIndicator: (base, state) => ({
     ...base,
-    color: state.isDisabled ? "var(--color-soft-gray)" : "var(--color-deep-gray)",
+    color: state.isDisabled
+      ? 'var(--color-soft-gray)'
+      : 'var(--color-deep-gray)',
   }),
-};
-
+}
 
 const CustomSelect = ({
-                        name: fieldName,
-                        options,
-                        control,
-                        rules,
-                        isRequired,
-                        label,
-                        errors,
-                        isDisabled = false,
-                        optionRenderer,
-                        singleValue,
-                        defaultValue,
-                      }) => {
-
+  name: fieldName,
+  options,
+  control,
+  rules,
+  isRequired,
+  label,
+  errors,
+  isDisabled = false,
+  optionRenderer,
+  singleValue,
+  defaultValue,
+}) => {
   const isValid = !!errors?.[fieldName]
 
   return (
-      <Controller name={fieldName} control={control} rules={rules} render={({field}) => (
-          <div className="form-group">
-            <InputLabel isRequired={isRequired} label={label} isDisabled={isDisabled}/>
-            <Select
-                {...field}
-                value={field.value || defaultValue}
-                options={options}
-                isDisabled={isDisabled}
-                isSearchable={false}
-                styles={customStyles}
-                isValid={isValid}
-                components={{
-                  Option: optionRenderer || components.Option,
-                  SingleValue: singleValue || components.SingleValue,
-                }}
-            />
-          </div>)}
-      />
-  );
-};
+    <Controller
+      name={fieldName}
+      control={control}
+      rules={rules}
+      render={({ field }) => (
+        <div className="form-group">
+          <InputLabel
+            isRequired={isRequired}
+            label={label}
+            isDisabled={isDisabled}
+          />
+          <Select
+            {...field}
+            value={field.value || defaultValue}
+            options={options}
+            isDisabled={isDisabled}
+            isSearchable={false}
+            styles={customStyles}
+            isValid={isValid}
+            components={{
+              Option: optionRenderer || components.Option,
+              SingleValue: singleValue || components.SingleValue,
+            }}
+          />
+        </div>
+      )}
+    />
+  )
+}
 
-export default CustomSelect;
+export default CustomSelect

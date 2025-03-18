@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import './Header.scss'
 import momentumImg from '../../assets/images/momentum.png'
 import Button from '../ui/Button.jsx'
-import CreateEmployeeModal from '../common/CreateEmplyeeModal.jsx'
+import CreateEmployeeModal from '../common/CreateEmployeeModal.jsx'
 
 const Header = () => {
   const navigate = useNavigate()

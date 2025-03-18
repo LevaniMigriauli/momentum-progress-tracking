@@ -13,4 +13,31 @@
     column-gap: 45px;
     row-gap: 45px;
   }
+
+  .image-picker {
+    grid-column: 1/3;
+    width: 100%;
+    border: 1px dashed #CED4DA;
+    height: 120px;
+
+    display: flex;
+    align-content: center;
+    justify-content: center;
+
+    &.pointer {
+      cursor: pointer;
+    }
+    &.invalid {
+      border-color: var(--color-vivid-red);
+    }
+
+    &__image {
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+    }
+    .delete-image {
+      cursor: pointer;
+    }
+  }
 }

@@ -31,8 +31,6 @@ const CustomModal = forwardRef(
     return (
       <Modal
         ref={ref}
-        className={className}
-        // overlayClassName={overlayClassName}
         isOpen={modalIsOpen}
         onRequestClose={() => {
           setModalIsOpen(false)
