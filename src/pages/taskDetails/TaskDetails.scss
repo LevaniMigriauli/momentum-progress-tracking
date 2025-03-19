@@ -1,0 +1,50 @@
+.page-task-details {
+  display: grid;
+  grid-template-columns: 715px 741px;
+  column-gap: 223px;
+
+  .section-task-details {
+
+  }
+
+  .section-comments {
+    padding: 45px 40px 52px 40px;
+    background-color: #F8F3FEA6;
+    border: 0.3px solid var(--color-pale-purple);
+    border-radius: 10px;
+
+    .comments-header {
+      font-size: 20px;
+      font-weight: 500;
+      margin-bottom: 40px;
+      display: flex;
+      align-items: center;
+
+      span {
+        font-size: 14px;
+        color: var(--color-white);
+        position: relative;
+        display:inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 30px;
+        height: 22px;
+        z-index: 1;
+        margin-left: 7px ;
+
+        &::after {
+          content: '';
+          width: 100%;
+          height: 100%;
+          background-color: var(--color-royal-purple);
+          position: absolute;
+          left: 0;
+          top: 0;
+          z-index: -1;
+          border-radius: 30px;
+        }
+      }
+    }
+  }
+}

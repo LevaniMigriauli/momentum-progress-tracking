@@ -1,0 +1,46 @@
+.comment-wrapper {
+  display: flex;
+  gap: 12px;
+
+  &.mb-58 {
+    margin-bottom: 58px;
+  }
+  &:not(:last-child).mb-38 {
+    margin-bottom: 38px;
+  }
+
+  img {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+  }
+
+  .author-name {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--color-charcoal-gray);
+    margin-bottom: 8px;
+  }
+
+  .comment {
+    font-size: 16px;
+    font-weight: 350;
+    color: var(--color-deep-gray);
+
+    &.mb-10 {
+      margin-bottom: 10px;
+    }
+    &.mb-20 {
+      margin-bottom: 20px;
+    }
+  }
+
+  .action-answer {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--color-royal-purple);
+    padding: 6px 0;
+    background: none;
+    border: none;
+  }
+}
