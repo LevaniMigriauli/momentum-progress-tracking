@@ -11,3 +11,7 @@ export const createTask = async (body) => {
 export const retrieveTask = async (id) => {
   return apiClient.get(`/tasks/${id}`).then((res) => res.data)
 }
+
+export const changeTaskStatus = async (id, statusBody) => {
+  return apiClient.put(`/tasks/${id}`, statusBody).then((res) => res.data)
+}
