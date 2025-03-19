@@ -9,19 +9,15 @@ const CommentTextarea = ({
   isReply = false,
 }) => {
   const [commentResponse, setCommentResponse] = useState('')
-  const [isValid, setIsValid] = useState(true)
 
   const textAreaIsValid = (value) => value && value.trim().length > 0
 
   const handleChange = (e) => {
-    const value = e.target.value
     if (isReply) {
       setCommentResponse(e.target.value)
     } else {
       handleCommentChange(e)
     }
-
-    setIsValid(textAreaIsValid(value))
   }
 
   const handleSubmit = () => {
@@ -29,17 +25,14 @@ const CommentTextarea = ({
 
     if (textAreaIsValid(text)) {
       handleCreateComment(text)
-      setIsValid(true)
       if (isReply) setCommentResponse('')
-    } else {
-      setIsValid(false)
     }
   }
 
   return (
     <div className={'comment-container'}>
       <textarea
-        className={`main-comment ${!isValid ? 'invalid' : ''}`}
+        className={'main-comment'}
         id={'main-comment'}
         name={'main-comment'}
         placeholder={'დაწერე კომენტარი'}

@@ -15,7 +15,7 @@ const CommentItem = ({
       className={`comment-wrapper ${hasResponse && isParent ? 'mb-58' : isParent ? 'mb-38' : ''}`}
     >
       <img src={authorAvatar} alt={`${authorNickname} image`} />
-      <div>
+      <div className="layout">
         <h5 className="author-name">{authorNickname}</h5>
         <p className={`comment ${hasResponse ? 'mb-20' : 'mb-10'}`}>
           {authorComment}
