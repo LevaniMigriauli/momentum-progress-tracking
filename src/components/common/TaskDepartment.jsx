@@ -7,7 +7,7 @@ const TaskPriority = ({ taskDepartment, className = '' }) => (
     className={clsx(
       'department',
       className,
-      departmentClassMap[taskDepartment.id],
+      departmentClassMap[taskDepartment.id] || 'default-background',
     )}
   >
     {taskDepartment.name}
