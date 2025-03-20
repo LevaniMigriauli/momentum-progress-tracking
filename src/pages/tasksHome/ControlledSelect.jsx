@@ -13,12 +13,12 @@ const ControlledSelect = ({
 }) => {
   const [menuIsOpen, setMenuIsOpen] = useState(false)
   const [tempSelection, setTempSelection] = useState(() => ({
-    ...selectedOptions,
+    [name]: selectedOptions[name] || [],
   }))
   const selectRef = useRef(null)
 
   const toggleMenu = () => {
-    setTempSelection({ ...selectedOptions })
+    setTempSelection({ [name]: selectedOptions[name] || [] })
     setMenuIsOpen((prev) => !prev)
   }
 
@@ -41,10 +41,6 @@ const ControlledSelect = ({
 
       return updatedSelection
     })
-
-    if (!isMulti) {
-      setMenuIsOpen(false)
-    }
   }
 
   const saveSelection = () => {
@@ -63,15 +59,13 @@ const ControlledSelect = ({
         !selectRef.current.contains(event.target)
       ) {
         setMenuIsOpen(false)
-        setTempSelection({ ...selectedOptions })
+        setTempSelection({ [name]: selectedOptions[name] || [] })
       }
     }
 
     document.addEventListener('mousedown', handleClickOutside)
     return () => document.removeEventListener('mousedown', handleClickOutside)
-  }, [menuIsOpen, selectedOptions])
-
-  console.log(options)
+  }, [menuIsOpen, selectedOptions, name])
 
   return (
     <div ref={selectRef} className="controlled-select">
