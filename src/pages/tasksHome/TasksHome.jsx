@@ -52,6 +52,7 @@ const TasksHome = () => {
             options={employeesList}
             selectedOptions={selectedOptions}
             setSelectedOptions={setSelectedOptions}
+            isMulti={false}
           />
         </div>
         <ul className={'selected-task-list'}>
