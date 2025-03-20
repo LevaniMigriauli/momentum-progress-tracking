@@ -7,6 +7,8 @@ import Select from '../ui/Select.jsx'
 import { useAppContext } from '../../context/appContext.jsx'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { createEmployees } from '../../api/employees.js'
+import Icon from './Icon.jsx'
+import Button from '../ui/Button.jsx'
 
 const validationSchema = {
   firstName: {
@@ -142,40 +144,53 @@ const CreateEmployeeModal = ({ modalRef }) => {
               }
 
               return (
-                <div
-                  className={`image-picker ${!value ? 'pointer' : ''} ${errors.employeeAvatar ? 'invalid' : ''}`}
-                  onClick={() => (!value ? fileInputRef.current.click() : null)}
-                >
-                  {!value && <p>ატვირთე ფოტო</p>}
-                  <input
-                    type={'file'}
-                    accept={'image/*'}
-                    ref={fileInputRef}
-                    hidden
-                    onChange={handleFileChange}
-                  />
-                  {value && (
-                    <div>
-                      <img
-                        className={'image-picker__image'}
-                        src={URL.createObjectURL(value)}
-                        alt="employee image"
-                      />
+                <>
+                  <div
+                    className={`image-picker ${!value ? 'pointer' : ''} ${errors.employeeAvatar ? 'invalid' : ''}`}
+                    onClick={() =>
+                      !value ? fileInputRef.current.click() : null
+                    }
+                  >
+                    {!value && (
+                      <div className={'upload-photo'}>
+                        <Icon name={'upload-photo'} viewBox={'0 0 24 24'} />{' '}
+                        <span>ატვირთე ფოტო</span>
+                      </div>
+                    )}
+                    <input
+                      type={'file'}
+                      accept={'image/*'}
+                      ref={fileInputRef}
+                      hidden
+                      onChange={handleFileChange}
+                    />
+                    {value && (
+                      <div className={'po-r'}>
+                        <img
+                          className={'image-picker__image'}
+                          src={URL.createObjectURL(value)}
+                          alt="employee image"
+                        />
+                        <Icon
+                          name={'delete'}
+                          className={'delete-image'}
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            setValue('employeeAvatar', null)
+                          }}
+                          viewBox={'0 0 26 26'}
+                        />
+                      </div>
+                    )}
+                    {errors.employeeAvatar && (
                       <span
-                        className={'delete-image'}
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          setValue('employeeAvatar', null)
-                        }}
+                        className={'image-picker__error validation-message'}
                       >
-                        წაშლა
+                        {errors?.employeeAvatar.message}
                       </span>
-                    </div>
-                  )}
-                  {errors.employeeAvatar && (
-                    <span>{errors?.employeeAvatar.message}</span>
-                  )}
-                </div>
+                    )}
+                  </div>
+                </>
               )
             }}
           />
@@ -188,16 +203,18 @@ const CreateEmployeeModal = ({ modalRef }) => {
             options={departmentsList}
             rules={validationSchema.department}
           />
-          <div>
-            <button
+          <div className={'create-employee-btns'}>
+            <Button
               onClick={() => {
                 reset()
                 modalRef?.current?.handleCloseModal()
               }}
             >
               გაუქმება
-            </button>
-            <button type={'submit'}>დაამატე თანამშრომელი</button>
+            </Button>
+            <Button type={'submit'} isPurple>
+              დაამატე თანამშრომელი
+            </Button>
           </div>
         </form>
       </div>

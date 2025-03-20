@@ -19,16 +19,37 @@
     width: 100%;
     border: 1px dashed #CED4DA;
     height: 120px;
+    border-radius: 8px;
+    position: relative;
 
     display: flex;
-    align-content: center;
+    align-items: center;
     justify-content: center;
+
+    .upload-photo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 50px;
+
+      svg {
+        width: 24px;
+        height: 24px;
+        margin-bottom: 7px;
+      }
+    }
 
     &.pointer {
       cursor: pointer;
     }
+
     &.invalid {
       border-color: var(--color-vivid-red);
+    }
+
+    .po-r {
+      position: relative;
+      display: flex;
     }
 
     &__image {
@@ -36,8 +57,31 @@
       height: 88px;
       border-radius: 50%;
     }
+
     .delete-image {
       cursor: pointer;
+      position: absolute;
+      bottom: 5px;
+      right: -3px;
+      width: 24px;
+      height: 24px;
+    }
+
+    &__error {
+      position: absolute;
+      bottom: -16px;
+      left: 0;
+      color: var(--color-vivid-red);
+    }
+  }
+
+  .create-employee-btns {
+    grid-row-start: 4;
+    grid-column: 2;
+    margin-top: 20px;
+
+    button:first-of-type {
+      margin-right: 22px;
     }
   }
 }
