@@ -31,14 +31,15 @@
     border: 0.5px solid var(--color-light-gray);
     border-radius: 10px;
     z-index: 10;
-    padding: 40px 30px 20px 30px;
+    padding: 40px 0 20px 0;
 
     .dropdown-option {
       display: flex;
       align-items: center;
       gap: 10px;
       cursor: pointer;
-      margin-bottom: 22px;
+      padding: 6px 30px;
+      margin-bottom: 10px;
 
       &:hover {
         background: var(--color-pale-purple);
