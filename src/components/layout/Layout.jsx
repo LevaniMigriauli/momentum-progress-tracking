@@ -1,16 +1,17 @@
-import {Outlet} from "react-router-dom";
-import Header from "./Header.jsx";
+import { Outlet } from 'react-router-dom'
+import Header from './Header.jsx'
+import SvgIcons from '../common/SvgIcons.jsx'
 
 const Layout = () => {
-
   return (
-      <>
-        <Header/>
-        <main>
-          <Outlet/>
-        </main>
-      </>
+    <>
+      <SvgIcons />
+      <Header />
+      <main>
+        <Outlet />
+      </main>
+    </>
   )
 }
 
-export default Layout;
+export default Layout

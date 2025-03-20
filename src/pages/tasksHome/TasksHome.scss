@@ -1,22 +1,69 @@
-
-.section-filter {
-  position: relative;
-
-  .filter-dropdowns {
-    display: flex;
+.tasks-home {
+  .header-main {
+    margin-bottom: 52px;
   }
-}
-
-.tasks-container {
-
-  .priorities-list {
 
 
-    .tasks-list {
+  .section-filter {
 
-      .tasks-list-card {
-        padding: 20px;
+    .filter-dropdowns {
+      position: relative;
+      display: flex;
+      gap: 45px;
+      border: 1px solid var(--color-light-gray);
+      border-radius: 10px;
+      width: fit-content;
+      margin-bottom: 25px;
+    }
+
+    .selected-task-list {
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 24px;
+      min-height: 29px;
+
+      &__item {
+        line-height: 16px;
+        color: var(--color-deep-gray);
+        border: 1px solid #CED4DA;
+        border-radius: 43px;
+        padding: 5px 10px;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+
+        .btn-delete-task {
+          width: 14px;
+          height: 14px;
+          border: none;
+          background: none;
+        }
+
+      }
+
+      .btn-clear-selected-tasks {
+        color: var(--color-deep-gray);
+        border: none;
+        background: none;
       }
     }
   }
+
+  .tasks-container {
+
+    .priorities-list {
+
+
+      .tasks-list {
+
+        .tasks-list-card {
+          padding: 20px;
+        }
+      }
+    }
+  }
+
 }
+

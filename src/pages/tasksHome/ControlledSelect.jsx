@@ -1,4 +1,7 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
+import './ControlledSelect.scss'
+import Icon from '../../components/common/Icon.jsx'
+import Button from '../../components/ui/Button.jsx'
 
 const ControlledSelect = ({
   name,
@@ -6,11 +9,12 @@ const ControlledSelect = ({
   selectedOptions,
   setSelectedOptions,
   isMulti = true,
-  label
+  label,
 }) => {
   const [menuIsOpen, setMenuIsOpen] = useState(false)
-  const [tempSelection, setTempSelection] = useState(
-    () => ({ ...selectedOptions }))
+  const [tempSelection, setTempSelection] = useState(() => ({
+    ...selectedOptions,
+  }))
   const selectRef = useRef(null)
 
   const toggleMenu = () => {
@@ -24,10 +28,12 @@ const ControlledSelect = ({
 
       if (isMulti) {
         const isAlreadySelected = updatedSelection[name]?.some(
-          (option) => option.value === selectedOption.value)
+          (option) => option.value === selectedOption.value,
+        )
         updatedSelection[name] = isAlreadySelected
           ? updatedSelection[name].filter(
-            (option) => option.value !== selectedOption.value)
+              (option) => option.value !== selectedOption.value,
+            )
           : [...(updatedSelection[name] || []), selectedOption]
       } else {
         updatedSelection[name] = [selectedOption]
@@ -44,15 +50,18 @@ const ControlledSelect = ({
   const saveSelection = () => {
     setSelectedOptions((prev) => ({
       ...prev,
-      [name]: tempSelection[name] || []
+      [name]: tempSelection[name] || [],
     }))
     setMenuIsOpen(false)
   }
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (menuIsOpen && selectRef.current &&
-        !selectRef.current.contains(event.target)) {
+      if (
+        menuIsOpen &&
+        selectRef.current &&
+        !selectRef.current.contains(event.target)
+      ) {
         setMenuIsOpen(false)
         setTempSelection({ ...selectedOptions })
       }
@@ -62,62 +71,48 @@ const ControlledSelect = ({
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [menuIsOpen, selectedOptions])
 
+  console.log(options)
+
   return (
-    <div ref={selectRef} style={{
-      maxWidth: '200px',
-      border: '1px solid #ccc',
-      borderRadius: '4px'
-    }}>
+    <div ref={selectRef} className="controlled-select">
       <div
         onClick={toggleMenu}
-        style={{
-          padding: '10px',
-          cursor: 'pointer',
-          background: '#fff',
-          display: 'flex',
-          alignItems: 'center'
-        }}
+        className={`select-label ${menuIsOpen ? 'selected' : ''}`}
       >
         {label}
+        <Icon
+          name={`${menuIsOpen ? 'arrow-down-purple' : 'arrow-down'}`}
+          viewBox={'0 0 24 24'}
+        />
       </div>
 
       {menuIsOpen && (
-        <div
-          style={{
-            position: 'absolute',
-            top: '100%',
-            left: '0',
-            width: '688px',
-            background: '#fff',
-            border: '1px solid #ccc',
-            borderRadius: '4px',
-            zIndex: 10
-          }}
-        >
+        <div className="dropdown-menu">
           {options.map((option) => (
             <div
               key={option.value}
               onClick={() => handleSelection(option)}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                padding: '10px',
-                cursor: 'pointer'
-              }}
+              className="dropdown-option"
             >
               <input
                 type="checkbox"
-                checked={tempSelection[name]?.some(
-                  (selected) => selected.value === option.value) || false}
+                checked={
+                  tempSelection[name]?.some(
+                    (selected) => selected.value === option.value,
+                  ) || false
+                }
                 readOnly
-                style={{ marginRight: '10px' }}
+                className="option-checkbox"
               />
+              {option.avatar && <img src={option.avatar} alt={option.label} />}
               {option.label}
             </div>
           ))}
-          <button type="button" onClick={saveSelection}>
-            არჩევა
-          </button>
+          <div className={'btn-container'}>
+            <Button isPurple onClick={saveSelection} className="select-button">
+              არჩევა
+            </Button>
+          </div>
         </div>
       )}
     </div>
