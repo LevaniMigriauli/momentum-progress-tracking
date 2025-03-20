@@ -5,13 +5,11 @@ import { useAppContext } from '../../context/appContext.jsx'
 import useTaskFilters, { initialState } from '../../hooks/useTaskFilters.js'
 import { hasSelectedOptions } from '../../utils/selectors.js'
 import { georgianMonths } from '../../constants/constants.js'
-import {
-  departmentClassMap,
-  statusClassMap,
-} from '../../constants/taskClassNames.js'
+import { statusClassMap } from '../../constants/taskClassNames.js'
 import ControlledSelect from './ControlledSelect.jsx'
 import Icon from '../../components/common/Icon.jsx'
 import TaskPriority from '../../components/common/TaskPriority.jsx'
+import TaskDepartment from '../../components/common/TaskDepartment.jsx'
 
 const TasksHome = () => {
   const navigate = useNavigate()
@@ -116,16 +114,9 @@ const TasksHome = () => {
                         <div className={'tasks-list-card__header'}>
                           <div className={'header-layout'}>
                             <TaskPriority taskPriority={task.priority} />
-                            <span
-                              className={clsx(
-                                'department',
-                                departmentClassMap[task.department.id],
-                              )}
-                            >
-                              {task.department.name}
-                            </span>
+                            <TaskDepartment taskDepartment={task.department} />
                           </div>
-                          <span className={'due-date'}>{dueDateFormatted}</span>
+                          <span>{dueDateFormatted}</span>
                         </div>
                         <div className={'tasks-list-card__text'}>
                           <h5>{task.name}</h5>

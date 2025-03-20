@@ -1,0 +1,26 @@
+.department {
+  color: var(--color-white);
+  display: inline-block;
+  width: 88px;
+  padding: 3px 6px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  border-radius: 15px;
+
+  &.administration {
+    background-color: var(--color-blossom-pink);
+  }
+
+  &.marketing {
+    background-color: var(--color-peach-orange);
+  }
+
+  &.logistics {
+    background-color: var(--color-pastel-blue);
+  }
+
+  &.tech {
+    background-color: var(--color-pastel-yellow);
+  }
+}

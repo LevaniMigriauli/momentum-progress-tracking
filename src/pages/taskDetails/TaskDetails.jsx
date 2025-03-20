@@ -9,6 +9,8 @@ import { createComment, getComments } from '../../api/comments.js'
 import Comment from './Comment.jsx'
 import CommentTextarea from './CommentTextarea.jsx'
 import TaskPriority from '../../components/common/TaskPriority.jsx'
+import TaskDepartment from '../../components/common/TaskDepartment.jsx'
+import Icon from '../../components/common/Icon.jsx'
 
 const TaskDetails = () => {
   const queryClient = useQueryClient()
@@ -74,17 +76,58 @@ const TaskDetails = () => {
   return (
     <div className={'page-task-details'}>
       <section className={'section-task-details'}>
-        <h1>Task Details</h1>
-        <TaskPriority taskPriority={taskDetails?.priority || []} />
-        <span>{taskDetails?.status.name}</span>
-        <span>{taskDetails?.department.name}</span>
-        <span>{taskDetails?.name}</span>
-        <Select
-          name={'priorities'}
-          options={statusesList}
-          value={taskStatus}
-          onChange={handleStatusChange}
-        />
+        <div className={'details-priority-department'}>
+          <TaskPriority
+            className={'fnt-16'}
+            taskPriority={taskDetails?.priority || []}
+          />
+          <TaskDepartment
+            className={'fnt-16'}
+            taskDepartment={taskDetails?.department || []}
+          />
+        </div>
+        <h2 className={'header-main'}>{taskDetails?.name}</h2>
+        <p className={'details-description'}>{taskDetails?.description}</p>
+
+        <div className={'task-details'}>
+          <h3>დავალების დეტალები</h3>
+          <div className={'task-details-grid'}>
+            <p className={'details-container__label'}>
+              <Icon name={'pie-chart'} viewBox={'0 0 24 24'} />
+              სტატუსი
+            </p>
+            <Select
+              name={'priorities'}
+              className={'mb-22'}
+              options={statusesList}
+              value={taskStatus}
+              onChange={handleStatusChange}
+            />
+            <p className={'details-container__label'}>
+              <Icon name={'user'} viewBox={'0 0 24 24'} />
+              თანამშრომელი
+            </p>
+            <div className={'details-container__employee'}>
+              <p className={'details-container__employee-department'}>
+                {taskDetails?.employee.department.name}
+              </p>
+              <div className={'details-container__employee-flex'}>
+                <img
+                  src={taskDetails?.employee.avatar}
+                  alt={`${taskDetails?.employee.name} image`}
+                />
+                <p>
+                  {taskDetails?.employee.name} {taskDetails?.employee.surname}
+                </p>
+              </div>
+            </div>
+            <p className={'details-container__label'}>
+              <Icon name={'calendar'} viewBox={'0 0 24 24'} />
+              დავალების ვადა
+            </p>
+            <p>{taskDetails?.due_date.split('T')[0].split('-').join('/')}</p>
+          </div>
+        </div>
       </section>
       <section className="section-comments">
         <CommentTextarea
