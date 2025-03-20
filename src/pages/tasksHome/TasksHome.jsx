@@ -4,13 +4,14 @@ import clsx from 'clsx'
 import { useAppContext } from '../../context/appContext.jsx'
 import useTaskFilters, { initialState } from '../../hooks/useTaskFilters.js'
 import { hasSelectedOptions } from '../../utils/selectors.js'
-import { georgianMonths } from '../../components/constants/constants.js'
+import { georgianMonths } from '../../constants/constants.js'
 import {
   departmentClassMap,
   statusClassMap,
-} from '../../components/constants/taskClassNames.js'
+} from '../../constants/taskClassNames.js'
 import ControlledSelect from './ControlledSelect.jsx'
 import Icon from '../../components/common/Icon.jsx'
+import TaskPriority from '../../components/common/TaskPriority.jsx'
 
 const TasksHome = () => {
   const navigate = useNavigate()
@@ -114,18 +115,7 @@ const TasksHome = () => {
                       >
                         <div className={'tasks-list-card__header'}>
                           <div className={'header-layout'}>
-                            <span
-                              className={clsx(
-                                'priority',
-                                statusClassMap[task.priority.id],
-                              )}
-                            >
-                              <img
-                                src={task.priority.icon}
-                                alt={`${task.name} icon`}
-                              />
-                              {task.priority.name}
-                            </span>
+                            <TaskPriority taskPriority={task.priority} />
                             <span
                               className={clsx(
                                 'department',

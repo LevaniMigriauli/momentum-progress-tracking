@@ -132,31 +132,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            //max-height: 26px;
 
-            .priority {
-              font-size: 12px;
-              display: flex;
-              gap: 4px;
-              padding: 3px 14px 3px 4px;
-              border-radius: 4px;
-              margin: 0;
-
-              &.low {
-                color: var(--color-vivid-green);
-                border: 1px solid var(--color-vivid-green);
-              }
-
-              &.medium {
-                color: var(--color-amber-yellow);
-                border: 1px solid var(--color-amber-yellow);
-              }
-
-              &.high {
-                color: var(--color-vivid-red);
-                border: 1px solid var(--color-vivid-red);
-              }
-            }
 
             .department {
               color: var(--color-white);

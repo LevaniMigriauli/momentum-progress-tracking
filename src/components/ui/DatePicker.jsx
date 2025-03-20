@@ -5,7 +5,7 @@ import 'react-calendar/dist/Calendar.css'
 import './DatePicker.scss'
 import ReactDatePicker from 'react-date-picker'
 import InputLabel from './InputLabel.jsx'
-import { georgianMonths, georgianWeekdays } from '../constants/constants.js'
+import { georgianMonths, georgianWeekdays } from '../../constants/constants.js'
 
 const DatePicker = ({
   name: fieldName,

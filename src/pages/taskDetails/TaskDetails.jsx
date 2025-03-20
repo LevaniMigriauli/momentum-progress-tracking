@@ -8,6 +8,7 @@ import { useAppContext } from '../../context/appContext.jsx'
 import { createComment, getComments } from '../../api/comments.js'
 import Comment from './Comment.jsx'
 import CommentTextarea from './CommentTextarea.jsx'
+import TaskPriority from '../../components/common/TaskPriority.jsx'
 
 const TaskDetails = () => {
   const queryClient = useQueryClient()
@@ -74,6 +75,10 @@ const TaskDetails = () => {
     <div className={'page-task-details'}>
       <section className={'section-task-details'}>
         <h1>Task Details</h1>
+        <TaskPriority taskPriority={taskDetails?.priority || []} />
+        <span>{taskDetails?.status.name}</span>
+        <span>{taskDetails?.department.name}</span>
+        <span>{taskDetails?.name}</span>
         <Select
           name={'priorities'}
           options={statusesList}
