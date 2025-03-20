@@ -5,6 +5,7 @@ import useTaskFilters, { initialState } from '../../hooks/useTaskFilters.js'
 import { hasSelectedOptions } from '../../utils/selectors.js'
 import { useNavigate } from 'react-router-dom'
 import Icon from '../../components/common/Icon.jsx'
+import { georgianMonths } from '../../components/constants/constants.js'
 
 const TasksHome = () => {
   const navigate = useNavigate()
@@ -80,33 +81,80 @@ const TasksHome = () => {
           )}
         </ul>
       </section>
-      <div className={'tasks-container'}>
-        <ul
-          className="priorities-list"
-          style={{ display: 'flex', gap: '100px' }}
-        >
-          {statusesList.map((item) => {
+      <section className={'section-tasks'}>
+        <ul className="priorities-list">
+          {statusesList.map(({ id, name }) => {
             return (
-              <li key={item.id} className={'priorities-list-item'}>
-                {item.name}
-                <ul className="tasks-list">
-                  {taskByStatus[item.id]?.map((task) => {
+              <ol key={id} className={'priorities-list-item'}>
+                <h3
+                  className={`priority ${id === 1 ? 'to-begin' : id === 2 ? 'in-progress' : id === 3 ? 'ready-for-testing' : 'done'} `}
+                >
+                  {name}
+                </h3>
+                <li className="tasks-list">
+                  {taskByStatus[id].map((task) => {
+                    const descriptionToShow =
+                      task.description?.length > 75
+                        ? task.description.slice(0, 75) + '...'
+                        : task.description
+
+                    const dueDate = task.due_date.split('T')[0].split('-')
+                    const year = dueDate[0]
+                    const month = dueDate[1]
+                    const day = dueDate[2]
+
+                    const dueDateFormatted = `${day} ${georgianMonths[Number(month)]}, ${year}`
+
                     return (
                       <div
                         key={task.id}
-                        className={'tasks-list-card'}
+                        className={`tasks-list-card ${id === 1 ? 'to-begin' : id === 2 ? 'in-progress' : id === 3 ? 'ready-for-testing' : 'done'} `}
                         onClick={() => navigate(`/task-details/${task.id}`)}
                       >
-                        {task.name}
+                        <div className={'tasks-list-card__header'}>
+                          <div className={'header-layout'}>
+                            <span
+                              className={`priority ${task.priority.id === 1 ? 'low' : task.priority.id === 2 ? 'medium' : 'high'}`}
+                            >
+                              <img
+                                src={task.priority.icon}
+                                alt={`${task.name} icon`}
+                              />
+                              {task.priority.name}
+                            </span>
+                            <span
+                              className={`department ${task.department.id === 1 ? 'administration' : task.department.id === 4 ? 'marketing' : task.department.id === 5 ? 'logistics' : task.department.id === 6 ? 'tech' : ''}`}
+                            >
+                              {task.department.name}
+                            </span>
+                          </div>
+                          <span className={'due-date'}>{dueDateFormatted}</span>
+                        </div>
+                        <div className={'tasks-list-card__text'}>
+                          <h5>{task.name}</h5>
+                          <p>{descriptionToShow}</p>
+                        </div>
+                        <div>
+                          <span className={'tasks-list-card__footer'}>
+                            <img
+                              src={task.employee.avatar}
+                              alt={`${task.employee.first_name} image`}
+                            />
+                            <span className={'tasks-list-card__footer-comment'}>
+                              <Icon name={'comment'} viewBox={'0 0 22 22'} />
+                              <span>{task.total_comments}</span>
+                            </span>
+                          </span>
+                        </div>
                       </div>
                     )
                   })}
-                </ul>
-              </li>
+                </li>
+              </ol>
             )
           })}
         </ul>
-      </div>
+      </section>
     </div>
   )
 }

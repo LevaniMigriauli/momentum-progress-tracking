@@ -20,6 +20,14 @@
     --color-deep-black: #0D0F10;
     --color-vivid-red: #FA4D4D;
     --color-vivid-green: #08A508;
+    --color-pastel-yellow: #FFD86D;
+    --color-golden-yellow: #F7BC30;
+    --color-amber-yellow :#FFBE0B;
+    --color-bright-orange: #FB5607;
+    --color-peach-orange : #FD9A6A;
+    --color-magenta-pink: #FF006E;
+    --color-pastel-blue: #89B6FF;
+    --color-royal-blue: #3A86FF;
 }
 
 body {
