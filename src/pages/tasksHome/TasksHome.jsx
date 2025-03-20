@@ -1,11 +1,16 @@
 import './TasksHome.scss'
+import { useNavigate } from 'react-router-dom'
+import clsx from 'clsx'
 import { useAppContext } from '../../context/appContext.jsx'
-import ControlledSelect from './ControlledSelect.jsx'
 import useTaskFilters, { initialState } from '../../hooks/useTaskFilters.js'
 import { hasSelectedOptions } from '../../utils/selectors.js'
-import { useNavigate } from 'react-router-dom'
-import Icon from '../../components/common/Icon.jsx'
 import { georgianMonths } from '../../components/constants/constants.js'
+import {
+  departmentClassMap,
+  statusClassMap,
+} from '../../components/constants/taskClassNames.js'
+import ControlledSelect from './ControlledSelect.jsx'
+import Icon from '../../components/common/Icon.jsx'
 
 const TasksHome = () => {
   const navigate = useNavigate()
@@ -86,11 +91,7 @@ const TasksHome = () => {
           {statusesList.map(({ id, name }) => {
             return (
               <ol key={id} className={'priorities-list-item'}>
-                <h3
-                  className={`priority ${id === 1 ? 'to-begin' : id === 2 ? 'in-progress' : id === 3 ? 'ready-for-testing' : 'done'} `}
-                >
-                  {name}
-                </h3>
+                <h3 className={clsx('priority', statusClassMap[id])}>{name}</h3>
                 <li className="tasks-list">
                   {taskByStatus[id].map((task) => {
                     const descriptionToShow =
@@ -108,13 +109,16 @@ const TasksHome = () => {
                     return (
                       <div
                         key={task.id}
-                        className={`tasks-list-card ${id === 1 ? 'to-begin' : id === 2 ? 'in-progress' : id === 3 ? 'ready-for-testing' : 'done'} `}
+                        className={clsx('tasks-list-card', statusClassMap[id])}
                         onClick={() => navigate(`/task-details/${task.id}`)}
                       >
                         <div className={'tasks-list-card__header'}>
                           <div className={'header-layout'}>
                             <span
-                              className={`priority ${task.priority.id === 1 ? 'low' : task.priority.id === 2 ? 'medium' : 'high'}`}
+                              className={clsx(
+                                'priority',
+                                statusClassMap[task.priority.id],
+                              )}
                             >
                               <img
                                 src={task.priority.icon}
@@ -123,7 +127,10 @@ const TasksHome = () => {
                               {task.priority.name}
                             </span>
                             <span
-                              className={`department ${task.department.id === 1 ? 'administration' : task.department.id === 4 ? 'marketing' : task.department.id === 5 ? 'logistics' : task.department.id === 6 ? 'tech' : ''}`}
+                              className={clsx(
+                                'department',
+                                departmentClassMap[task.department.id],
+                              )}
                             >
                               {task.department.name}
                             </span>
