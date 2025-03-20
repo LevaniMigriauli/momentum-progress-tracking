@@ -60,28 +60,37 @@ const today = new Date()
 const nextDay = new Date(today)
 nextDay.setDate(nextDay.getDate() + 1)
 
-const handleInitialState = (defaultPriority) => ({
+const handleInitialState = (defaultPriority, defaultStatus) => ({
   title: '',
   department: null,
   description: '',
   employee: null,
   priority: defaultPriority,
-  status: null,
+  status: defaultStatus,
   dueDate: nextDay,
 })
 
-const loadFormData = (defaultPriority) => {
+const loadFormData = (defaultPriority, defaultStatus) => {
   const savedData = localStorage.getItem('createTaskFormData')
-  return savedData ? JSON.parse(savedData) : handleInitialState(defaultPriority)
+  return savedData
+    ? JSON.parse(savedData)
+    : handleInitialState(defaultPriority, defaultStatus)
 }
 
 const CreateTask = () => {
   const queryClient = useQueryClient()
   const navigate = useNavigate()
   const modalRef = useRef(null)
-  const { departmentsList, employeesList, defaultPriority, statusesList } =
-    useAppContext()
+  const {
+    departmentsList,
+    employeesList,
+    defaultPriority,
+    defaultStatus,
+    statusesList,
+  } = useAppContext()
 
+  console.log(defaultPriority)
+  console.log(defaultStatus)
   const {
     register,
     control,
@@ -92,7 +101,7 @@ const CreateTask = () => {
     formState: { errors, dirtyFields },
   } = useForm({
     mode: 'onChange',
-    defaultValues: loadFormData(defaultPriority),
+    defaultValues: loadFormData(defaultPriority, defaultStatus),
   })
 
   const selectedDepartment = watch('department')
@@ -113,6 +122,12 @@ const CreateTask = () => {
       setValue('employee', null)
     }
   }, [selectedDepartment, setValue])
+
+  useEffect(() => {
+    if (defaultStatus && defaultStatus !== getValues('status')) {
+      setValue('status', defaultStatus)
+    }
+  }, [defaultStatus, setValue])
 
   useEffect(() => {
     if (defaultPriority) {

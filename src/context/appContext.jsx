@@ -54,8 +54,7 @@ export const AppProvider = ({ children }) => {
         label: priority.name,
       }
     }) || []
-  const defaultPriority =
-    prioritiesList.find((item) => item.value === 2) || null
+  const defaultPriority = prioritiesList.find((item) => item.id === 2) || null
 
   const statusesList =
     statuses?.map((status) => ({
@@ -64,6 +63,7 @@ export const AppProvider = ({ children }) => {
       value: status.id,
       label: status.name,
     })) || []
+  const defaultStatus = statusesList.find((item) => item.id === 1) || null
 
   return (
     <AppContext.Provider
@@ -73,6 +73,7 @@ export const AppProvider = ({ children }) => {
         prioritiesList,
         defaultPriority,
         statusesList,
+        defaultStatus,
       }}
     >
       {children}

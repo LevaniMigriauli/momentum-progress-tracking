@@ -4,7 +4,6 @@ import InputLabel from './InputLabel.jsx'
 
 const customStyles = {
   control: (base, state) => {
-    console.log(base, state.selectProps)
     return {
       ...base,
       borderRadius: '5px',
@@ -73,7 +72,6 @@ const CustomSelect = ({
   isDisabled = false,
   optionRenderer,
   singleValue,
-  defaultValue,
   value,
   onChange,
 }) => {
