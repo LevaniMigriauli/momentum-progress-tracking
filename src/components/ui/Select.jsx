@@ -80,7 +80,7 @@ const CustomSelect = ({
   const isValid = !!errors?.[fieldName]
 
   const selectProps = {
-    value,
+    value: value ?? null,
     options,
     isDisabled,
     isSearchable: false,
@@ -108,7 +108,10 @@ const CustomSelect = ({
             <Select
               {...field}
               {...selectProps}
-              value={field.value ?? defaultValue}
+              value={field.value ?? null}
+              onChange={(selectedOption) => {
+                field.onChange(selectedOption || null)
+              }}
             />
           )}
         />

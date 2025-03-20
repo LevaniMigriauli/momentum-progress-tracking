@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useMemo, useRef } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
@@ -79,7 +79,8 @@ const CreateTask = () => {
   const queryClient = useQueryClient()
   const navigate = useNavigate()
   const modalRef = useRef(null)
-  const { departmentsList, defaultPriority, statusesList } = useAppContext()
+  const { departmentsList, employeesList, defaultPriority, statusesList } =
+    useAppContext()
 
   const {
     register,
@@ -93,6 +94,25 @@ const CreateTask = () => {
     mode: 'onChange',
     defaultValues: loadFormData(defaultPriority),
   })
+
+  const selectedDepartment = watch('department')
+
+  const filteredEmployees = useMemo(() => {
+    console.log(employeesList)
+    console.log(selectedDepartment)
+    return (
+      employeesList?.filter(
+        (employee) => employee.department?.id === selectedDepartment?.id,
+      ) || []
+    )
+  }, [selectedDepartment, employeesList])
+  console.log(filteredEmployees)
+
+  useEffect(() => {
+    if (selectedDepartment) {
+      setValue('employee', null)
+    }
+  }, [selectedDepartment, setValue])
 
   useEffect(() => {
     if (defaultPriority) {
@@ -198,6 +218,8 @@ const CreateTask = () => {
           rules={validationSchema.employee}
           isDisabled={!getValues('department')}
           modalRef={modalRef}
+          selectedEmployee={watch('employee')}
+          options={filteredEmployees}
         />
 
         <div className={'form__priority-status'}>
