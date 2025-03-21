@@ -13,7 +13,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <AppProvider>
-        <BrowserRouter>
+        <BrowserRouter basename={'/momentum-progress-tracking'}>
           <Routes>
             <Route path="/" element={<Layout />}>
               <Route index element={<TasksHome />} />
