@@ -12,12 +12,10 @@ const DatePicker = ({
   label,
   control,
   isRequired,
-  errors,
   className,
   nextDay,
 }) => {
   const [isOpen, setIsOpen] = useState(false)
-  // const hasError = !!errors?.[fieldName];
 
   return (
     <Controller
