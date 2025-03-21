@@ -6,6 +6,7 @@ import TasksHome from './pages/tasksHome/TasksHome.jsx'
 import TaskDetails from './pages/taskDetails/TaskDetails.jsx'
 import CreateTask from './pages/createTask/CreateTask.jsx'
 import { AppProvider } from './context/appContext.jsx'
+import ErrorPage from './pages/ErrorPage.jsx'
 
 const queryClient = new QueryClient()
 
@@ -19,6 +20,7 @@ function App() {
               <Route index element={<TasksHome />} />
               <Route path="/task-details/:id" element={<TaskDetails />} />
               <Route path="/create-task" element={<CreateTask />} />
+              <Route path={'*'} element={<ErrorPage />} />
             </Route>
           </Routes>
         </BrowserRouter>
