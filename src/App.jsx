@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { HashRouter, Route, Routes } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import './App.css'
 import Layout from './components/layout/Layout.jsx'
@@ -14,7 +14,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <AppProvider>
-        <BrowserRouter basename={'/momentum-progress-tracking'}>
+        <HashRouter>
           <Routes>
             <Route path="/" element={<Layout />}>
               <Route index element={<TasksHome />} />
@@ -23,7 +23,7 @@ function App() {
               <Route path={'*'} element={<ErrorPage />} />
             </Route>
           </Routes>
-        </BrowserRouter>
+        </HashRouter>
       </AppProvider>
     </QueryClientProvider>
   )
