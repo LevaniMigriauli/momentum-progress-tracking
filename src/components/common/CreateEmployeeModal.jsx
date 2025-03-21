@@ -177,6 +177,9 @@ const CreateEmployeeModal = ({ modalRef }) => {
                           onClick={(e) => {
                             e.stopPropagation()
                             setValue('employeeAvatar', null)
+                            if (fileInputRef.current) {
+                              fileInputRef.current.value = ''
+                            }
                           }}
                           viewBox={'0 0 26 26'}
                         />
@@ -202,6 +205,7 @@ const CreateEmployeeModal = ({ modalRef }) => {
             errors={errors}
             options={departmentsList}
             rules={validationSchema.department}
+            menuPlacement={'top'}
           />
           <div className={'create-employee-btns'}>
             <Button

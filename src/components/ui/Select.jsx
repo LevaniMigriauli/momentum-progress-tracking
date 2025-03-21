@@ -74,6 +74,7 @@ const CustomSelect = ({
   singleValue,
   value,
   onChange,
+  menuPlacement,
 }) => {
   const isValid = !!errors?.[fieldName]
 
@@ -106,6 +107,7 @@ const CustomSelect = ({
             <Select
               {...field}
               {...selectProps}
+              menuPlacement={menuPlacement}
               value={field.value ?? null}
               onChange={(selectedOption) => {
                 field.onChange(selectedOption || null)
