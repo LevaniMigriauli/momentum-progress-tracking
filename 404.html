@@ -2,9 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="refresh" content="0; url=/momentum-progress-tracking/" />
     <title>Redirecting...</title>
+    <script>
+      const pathname = location.pathname.replace('/momentum-progress-tracking', '');
+      const search = location.search || '';
+      const hash = location.hash || '';
+      const newPath = `/momentum-progress-tracking/${pathname}${search}${hash}`;
+      location.replace(newPath);
+    </script>
 </head>
 <body>
+<p>Redirecting...</p>
 </body>
 </html>
