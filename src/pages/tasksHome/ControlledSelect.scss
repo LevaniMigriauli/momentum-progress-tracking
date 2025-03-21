@@ -22,7 +22,6 @@
   }
 
   .dropdown-menu {
-    margin-top: 11px;
     position: absolute;
     top: 100%;
     left: 0;
@@ -31,7 +30,10 @@
     border: 0.5px solid var(--color-light-gray);
     border-radius: 10px;
     z-index: 10;
+    margin-top: 11px;
     padding: 40px 0 20px 0;
+    max-height: 420px;
+    overflow-y: scroll;
 
     .dropdown-option {
       display: flex;
@@ -84,6 +86,7 @@
     .btn-container {
       display: flex;
       justify-content: flex-end;
+      margin-right: 30px;
 
       .select-button {
         border-radius: 20px;
