@@ -113,8 +113,19 @@ const CreateTask = () => {
   }, [selectedDepartment, employeesList])
 
   useEffect(() => {
+    const savedForm = localStorage.getItem('createTaskFormData')
+    const parsedForm = savedForm ? JSON.parse(savedForm) : null
+    const savedEmployee = parsedForm?.employee
+
     if (selectedDepartment) {
-      setValue('employee', null)
+      const employeeWasSelected =
+        savedEmployee?.department?.id === selectedDepartment.id
+
+      if (employeeWasSelected) {
+        setValue('employee', savedEmployee)
+      } else {
+        setValue('employee', null)
+      }
     }
   }, [selectedDepartment, setValue])
 
