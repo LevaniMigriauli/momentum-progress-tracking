@@ -27,16 +27,23 @@ const customStyles = {
     ...base,
     padding: 0,
   }),
-  option: (base) => ({
+  option: (base, state) => ({
     ...base,
     fontSize: '14px',
     fontWeight: '300',
-    color: 'var(--color-deep-black)',
+    color: state.isSelected ? 'var(--color-white)' : 'var(--color-deep-black)',
     padding: '9px 14px',
     height: '46px',
     display: 'flex',
     alignItems: 'center',
     gap: '6px',
+    background: state.isSelected
+      ? 'var(--color-royal-purple)'
+      : 'var(--color-white)',
+    '&:hover': {
+      background: 'var(--color-pale-purple)',
+      cursor: 'pointer',
+    },
   }),
   singleValue: (base) => ({
     ...base,
