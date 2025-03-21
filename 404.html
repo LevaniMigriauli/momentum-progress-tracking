@@ -1,21 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8"/>
     <title>Redirecting…</title>
-    <script type="text/javascript">
+    <script>
       (function () {
-        var redirectTo = sessionStorage.redirectTo;
-        delete sessionStorage.redirectTo;
-        if (redirectTo) {
-          location.replace(redirectTo);
-        } else {
-          var path = location.pathname;
-          var search = location.search;
-          var hash = location.hash;
-          var newUrl = '/momentum-progress-tracking/' + path.replace(/^\/+/, '') + search + hash;
-          sessionStorage.redirectTo = newUrl;
-          location.replace('/momentum-progress-tracking/404.html');
+        const prefix = '/momentum-progress-tracking';
+        const path = window.location.pathname;
+        const search = window.location.search || '';
+        const hash = window.location.hash || '';
+
+        if (!path.startsWith(prefix + '/')) {
+          const newUrl = prefix + path + search + hash;
+          window.location.replace(newUrl);
         }
       })();
     </script>
