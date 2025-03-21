@@ -89,6 +89,8 @@ const CreateTask = () => {
     statusesList,
   } = useAppContext()
 
+  const savedFormData = loadFormData(defaultPriority, defaultStatus)
+
   const {
     register,
     control,
@@ -99,7 +101,7 @@ const CreateTask = () => {
     formState: { errors, dirtyFields },
   } = useForm({
     mode: 'onChange',
-    defaultValues: loadFormData(defaultPriority, defaultStatus),
+    defaultValues: savedFormData,
   })
 
   const selectedDepartment = watch('department')
@@ -113,9 +115,7 @@ const CreateTask = () => {
   }, [selectedDepartment, employeesList])
 
   useEffect(() => {
-    const savedForm = localStorage.getItem('createTaskFormData')
-    const parsedForm = savedForm ? JSON.parse(savedForm) : null
-    const savedEmployee = parsedForm?.employee
+    const { employee: savedEmployee } = savedFormData
 
     if (selectedDepartment) {
       const employeeWasSelected =
@@ -130,12 +130,18 @@ const CreateTask = () => {
   }, [selectedDepartment, setValue])
 
   useEffect(() => {
-    if (defaultStatus && defaultStatus !== getValues('status')) {
+    const { status: savedStatus } = savedFormData
+    if (savedStatus) return
+
+    if (defaultStatus) {
       setValue('status', defaultStatus)
     }
   }, [defaultStatus, setValue])
 
   useEffect(() => {
+    const { priority: savedPriority } = savedFormData
+    if (savedPriority) return
+
     if (defaultPriority) {
       setValue('priority', defaultPriority)
     }
