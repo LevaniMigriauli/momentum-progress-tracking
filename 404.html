@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8"/>
     <title>Redirecting...</title>
     <script>
-      const pathname = location.pathname.replace('/momentum-progress-tracking', '');
-      const search = location.search || '';
-      const hash = location.hash || '';
-      const newPath = `/momentum-progress-tracking/${pathname}${search}${hash}`;
-      location.replace(newPath);
+      const prefix = '/momentum-progress-tracking';
+      const current = location.pathname;
+
+      if (!current.startsWith(prefix)) {
+        const path = current.replace(/^\/+|\/+$/g, '');
+        const search = location.search || '';
+        const hash = location.hash || '';
+        const newPath = `${prefix}/${path}${search}${hash}`;
+        location.replace(newPath);
+      }
     </script>
 </head>
 <body>
