@@ -39,10 +39,6 @@
         align-items: center;
         row-gap: 46px;
 
-        .mb-20 {
-          margin-bottom: -22px;
-        }
-
         .details-container__label {
           display: flex;
           align-items: center;
@@ -51,6 +47,10 @@
 
           svg {
             width: 24px;
+          }
+
+          &.status {
+            margin-top: 24px;
           }
         }
 

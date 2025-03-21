@@ -92,13 +92,12 @@ const TaskDetails = () => {
         <div className={'task-details'}>
           <h3>დავალების დეტალები</h3>
           <div className={'task-details-grid'}>
-            <p className={'details-container__label'}>
+            <p className={'details-container__label status'}>
               <Icon name={'pie-chart'} viewBox={'0 0 24 24'} />
               სტატუსი
             </p>
             <Select
               name={'priorities'}
-              className={'mb-22'}
               options={statusesList}
               value={taskStatus}
               onChange={handleStatusChange}

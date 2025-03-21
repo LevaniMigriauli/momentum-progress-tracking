@@ -1,4 +1,11 @@
 .modal-content {
+  svg.cancel-icon {
+    position: absolute;
+    right: 50px;
+    top: 40px;
+    width: 40px;
+    cursor: pointer;
+  }
 
   .modal-title {
     text-align: center;

@@ -88,6 +88,11 @@ const CreateEmployeeModal = ({ modalRef }) => {
     },
   })
 
+  const handleModalClose = () => {
+    reset()
+    modalRef?.current?.handleCloseModal()
+  }
+
   const onSubmit = (data) => {
     const { firstName, lastname, employeeAvatar, department } = data
     const form = new FormData()
@@ -108,6 +113,12 @@ const CreateEmployeeModal = ({ modalRef }) => {
       padding={'117px 50px 60px 50px'}
     >
       <div className="modal-content">
+        <Icon
+          name={'cancel'}
+          className={'cancel-icon'}
+          viewBox={'0 0 40 40'}
+          onClick={handleModalClose}
+        />
         <h2 className={'modal-title'}>თანამშრომლის დამატება</h2>
         <form
           className={'create-employee-modal'}
@@ -208,14 +219,7 @@ const CreateEmployeeModal = ({ modalRef }) => {
             menuPlacement={'top'}
           />
           <div className={'create-employee-btns'}>
-            <Button
-              onClick={() => {
-                reset()
-                modalRef?.current?.handleCloseModal()
-              }}
-            >
-              გაუქმება
-            </Button>
+            <Button onClick={handleModalClose}>გაუქმება</Button>
             <Button type={'submit'} isPurple>
               დაამატე თანამშრომელი
             </Button>

@@ -93,11 +93,13 @@ const CustomSelect = ({
 
   return (
     <div className="form-group">
-      <InputLabel
-        isRequired={isRequired}
-        label={label}
-        isDisabled={isDisabled}
-      />
+      {label && (
+        <InputLabel
+          isRequired={isRequired}
+          label={label}
+          isDisabled={isDisabled}
+        />
+      )}
       {control ? (
         <Controller
           name={fieldName}
