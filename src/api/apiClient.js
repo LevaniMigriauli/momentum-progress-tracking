@@ -1,6 +1,8 @@
 import axios from 'axios'
 
-const token = '9e6c5dce-6c15-4bde-bd58-e850ce4cde4d'
+// prev test token
+// const token = '9e6c5dce-6c15-4bde-bd58-e850ce4cde4d'
+const token = '9e7c99ea-dd8e-4ed5-8efb-1976bad6f050'
 const BASE_URL = 'https://momentum.redberryinternship.ge/api'
 
 const apiClient = axios.create({
