@@ -8,9 +8,21 @@
   background-color: var(--color-white);
   color: var(--color-charcoal-gray);
   border: 1px solid var(--color-royal-purple);
+  transition: 0.3s ease-in-out;
 
-  &.purple{
+  &:hover {
+    color: var(--color-white);
+    background: var(--color-royal-purple);
+  }
+
+  &.purple {
     color: var(--color-white);
     background-color: var(--color-royal-purple);
+    transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+
+    &:hover {
+      color: #f0eaff;
+      background: var(--color-purple-blue);
+    }
   }
 }
