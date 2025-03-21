@@ -1,10 +1,10 @@
+import './EmployeesSelect.scss'
 import Select from '../../components/ui/Select.jsx'
 import { components } from 'react-select'
 
 const employeesListOptionRenderer = (props) => {
   const { data, selectOption, innerRef, innerProps } = props
 
-  // console.log(props)
   const handleClick = (event) => {
     event.stopPropagation()
 
@@ -20,7 +20,7 @@ const employeesListOptionRenderer = (props) => {
     <div
       ref={innerRef}
       {...innerProps}
-      className={`custom-option ${data.isCustom ? 'add-employee' : ''}`}
+      className={`custom-option custom-option-employee ${data.isCustom ? 'add-employee' : ''}`}
       onClick={handleClick}
     >
       {data.avatar && (

@@ -25,7 +25,7 @@ const DatePicker = ({
         const handleDateChange = (date) => {
           if (date instanceof Date) {
             const formattedDate = date.toLocaleDateString('en-CA')
-            console.log(formattedDate)
+
             field.onChange(formattedDate)
             setIsOpen(false)
           }

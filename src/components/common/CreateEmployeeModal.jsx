@@ -45,7 +45,6 @@ const validationSchema = {
     required: 'გთხოვთ ატვირთოთ სურათი',
     validate: {
       fileSize: (value) => {
-        console.log(value)
         return value?.size < 600 * 1024 || 'მაქსიმუმ 600kb'
       },
     },
@@ -96,7 +95,7 @@ const CreateEmployeeModal = ({ modalRef }) => {
   const onSubmit = (data) => {
     const { firstName, lastname, employeeAvatar, department } = data
     const form = new FormData()
-    console.log(data)
+
     form.append('name', firstName)
     form.append('surname', lastname)
     form.append('avatar', employeeAvatar)

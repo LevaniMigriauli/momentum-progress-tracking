@@ -89,8 +89,6 @@ const CreateTask = () => {
     statusesList,
   } = useAppContext()
 
-  console.log(defaultPriority)
-  console.log(defaultStatus)
   const {
     register,
     control,
@@ -107,15 +105,12 @@ const CreateTask = () => {
   const selectedDepartment = watch('department')
 
   const filteredEmployees = useMemo(() => {
-    console.log(employeesList)
-    console.log(selectedDepartment)
     return (
       employeesList?.filter(
         (employee) => employee.department?.id === selectedDepartment?.id,
       ) || []
     )
   }, [selectedDepartment, employeesList])
-  console.log(filteredEmployees)
 
   useEffect(() => {
     if (selectedDepartment) {
